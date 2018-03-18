@@ -1,0 +1,43 @@
+.orgchart{
+    background-image: none;
+}
+.orgchart .spinner{
+    font-size: 50px;
+    color:#0d98c1;
+}
+.orgchart .node .title {
+    background-color: #0d98c1;
+}
+.orgchart .node .content {
+    border-color: #0d98c1;
+}
+.orgchart .mi .title {
+    background-color: #ff6700;
+}
+.orgchart .mi .content {
+    border-color: #ff6700;
+}
+.orgchart .second-menu-icon {
+    opacity: 0.8;
+    left: -6px;
+    bottom: -9px;
+    z-index: 2;
+    color: #449d44;
+    font-size: 18px;
+    position: absolute;
+    transform: rotate(-90deg) rotateY(180deg);
+    -ms-transform: rotate(-90deg) rotateY(180deg);
+    -moz-transform: rotate(-90deg) rotateY(180deg);
+    -webkit-transform: rotate(-90deg) rotateY(180deg);
+    transform-origin: left top;
+    -ms-transform-origin: left top;
+    -moz-transform-origin: left top;
+    -webkit-transform-origin: left top;
+}
+.orgchart.l2r{
+    position: relative;
+}
+.org-nodes-select{
+    display: none;
+    width: 100%
+}

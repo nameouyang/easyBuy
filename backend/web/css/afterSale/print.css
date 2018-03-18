@@ -1,0 +1,220 @@
+body {
+    margin: 0;
+    font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", sans-serif;
+    background-color: #fff;
+    color: #666;
+    width: 80%; height:80%;
+}
+
+/* 工具 */
+.align-left {
+    text-align: left;
+}
+.align-center {
+    text-align: center;
+}
+.align-justify {
+    text-align: justify;
+}
+.align-right {
+    text-align: right;
+}
+.space-2 {
+    padding-left: 2em;
+}
+.space-sign {
+    padding-left: 12em;
+    border-bottom: 1px solid #666;
+}
+.sign {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.quote {
+    position: relative;
+    padding: 0 .3em;
+    margin: 5px;
+}
+.quote:before,
+.quote:after {
+    position: absolute;
+}
+.quote:before {
+    left: -.75em;
+    content: '【';
+    line-height: 1.5;
+}
+.quote:after {
+    right: -.75em;
+    content: '】';
+}
+
+.container {
+    position: relative;
+    width: 1240px;
+    margin: 0 auto;
+}
+.order {
+    position: relative;
+    padding: 85px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.order-logo {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    background: url(/images/logo.png) no-repeat 50% 50%;
+}
+
+.order + .order {
+    border-top: 1px dashed #666;
+}
+.order table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.order th {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: left;
+}
+.order th,
+.order td {
+    position: relative;
+    padding: 0;
+    vertical-align: top;
+}
+.order p {
+    margin: 0;
+}
+.order ul,
+.order ol {
+    margin: 1em 0;
+    padding-left: 20px;
+    font-size: 16px;
+}
+.order li {
+    margin-bottom: 0.5em;
+}
+.order-tip {
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    z-index: 99;
+    width: 160px;
+    margin-left: -80px;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #fff;
+    color: #999;
+}
+
+/* 主表单 */
+.order-table h1 {
+    margin: 0;
+    font-size: 32px;
+    -webkit-font-smoothing: antialiased;
+}
+.order-table h2 {
+    margin: 2em 0 -0.5em;
+    font-size: 18px;
+    font-weight: 400;
+}
+.order-table > thead tr:first-of-type > td {
+    padding-top: 0;
+    padding-bottom: 45px;
+}
+.order-table > tfoot td {
+    border-top: 1px solid #333;
+}
+.order-table > tfoot tr:first-of-type > td {
+    padding-top: 20px;
+}
+.order-table > tfoot tr:first-of-type > td .sign {
+    top: 20px;
+}
+.order-table .col-l,
+.order-table .col-r {
+    padding-bottom: 10px;
+}
+.order-table .col-l {
+    width: 725px;
+}
+
+/* 嵌套框 */
+.info-table {
+    font-size: 18px;
+}
+.info-table + .info-table {
+    margin-top: 36px;
+}
+.info-table thead th {
+    border-bottom: 1px solid #333;
+}
+.info-table tfoot td {
+    border-top: 1px solid #333;
+}
+.info-table tbody tr:first-of-type > td {
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+
+/* 商品表单 */
+.item-table {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 16px;
+}
+.item-table .col-1 {
+    width: 175px;
+}
+.item-table .col-3 {
+    width: 80px;
+    text-align: center;
+}
+.item-table th {
+    font-size: 16px;
+}
+.item-table tbody tr:first-of-type > td,
+.item-table tfoot tr:first-of-type > td {
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+.item-table tbody tr:last-of-type > td {
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+
+/* 条码信息 */
+.qr-detail-list {
+    margin: 0 0 0 85px;
+}
+.qr-detail-list + .qr-detail-list {
+    margin-top: 30px;
+}
+.qr-detail-list dt {
+    font-weight: 700;
+}
+.qr-detail-list dd {
+    margin: 0;
+    font-size: 16px;
+}
+.qr-detail-list img {
+    padding-top: 5px;
+    padding-left: 3px;
+    max-width: 340px;
+    width: auto;
+    height: auto;
+}
+.displaynone{
+    display: none;
+}
+.displayactive{
+    display: block;
+}

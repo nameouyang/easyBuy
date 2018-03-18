@@ -1,0 +1,12 @@
+a {
+    color: inherit;
+}
+
+body {
+    font-size:0.875rem;
+}
+
+.ivu-input {
+    height:38px;
+    border-radius: 0;
+}

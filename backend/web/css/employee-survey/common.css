@@ -1,0 +1,49 @@
+    .viewTree ul {
+        margin: 0;
+        margin-left: 20px;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .viewTree li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .viewTree li a:hover {
+        background: #ccc;
+    }
+
+    .viewTree li i {
+        margin-right: 12px;
+        display: inline-block;
+        width: 10px;
+        cursor: pointer;
+    }
+
+        .viewTree li .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #f44455;
+        border: 2px #fff solid;
+        position: absolute;
+        top: 1px;
+        border-radius: 100%
+    }
+
+        .viewTree li label {
+        position: relative;
+    }
+
+    .mtop{
+        margin-top: 8px
+
+    }
+    .mleft{
+        margin-left: 10px
+    }
+
+    .mbuttom{
+        margin-bottom: 4px
+    }

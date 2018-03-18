@@ -1,0 +1,178 @@
+@font-face {
+font-family: 'HY';
+font-weight: 500;
+src: url('./fonts/HYQiHei-50S.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'MP';
+src: url('./fonts/MyriadPro-Semibold.ttf') format('truetype');
+}
+
+* {
+padding: 0;
+margin: 0;
+}
+
+body {
+    font-family: arial;
+    color: #3f3b3a;
+}
+
+.wrapper {
+float: left;
+padding: 9.5mm;
+margin: 30px;
+border: 1px solid #3f3b3a;
+}
+
+.content {
+position: relative;
+width: 78mm;
+height: 78mm;
+/*border: 1px solid #000;*/
+}
+
+.content h1 {
+font-size: 24pt;
+font-weight: 500;
+margin-bottom: 6pt;
+/*font-family: 'HYQiHei';*/
+font-family: 'HY';
+}
+
+.content .con-list li {
+list-style: none;
+font-size: 8pt;
+line-height: 16pt;
+font-family: 'HY';
+}
+
+.content .con-list li:before {
+content: '•';
+display: inline-block;
+width: 8pt;
+}
+
+
+
+.content .section-price {
+position: absolute;
+bottom: 14pt;
+font-size: 8pt;
+font-family: 'MP';
+}
+
+.section-price .sign {
+position: absolute;
+top: 2pt;
+left: -3pt;
+font-size: 14pt;
+font-style: normal;
+color: #eb6717;
+}
+
+.section-price .price {
+font-size: 38pt;
+padding-left: 8pt;
+font-weight: 700;
+color: #eb6717;
+font-family: 'MP';
+}
+
+.content .note {
+font-size: 8pt;
+position: absolute;
+bottom: 0;
+left: 0;
+font-family: 'HY';
+}
+
+.content .qrcode {
+position: absolute;
+width: 18mm;
+height: 18mm;
+right: 0;
+bottom: 0;
+background: #000;
+}
+
+.wrapper-little {
+    float: left;
+    padding: 5mm 4mm;
+    margin: 50px;
+    border: 1px solid #000;
+}
+
+.wrapper-little .content {
+    position: relative;
+    width: 52mm;
+    height: 23mm;
+    /*border: 1px solid #000;*/
+}
+
+
+.wrapper-little .content h1 {
+    font-size: 14pt;
+    font-weight: 400;
+    line-height: 22px;
+    font-family: 'HY';
+}
+
+.wrapper-little .content .sub {
+    font-size: 10pt;
+    font-family: 'HY';
+}
+
+.wrapper-little .content .con-list li {
+    list-style: none;
+    font-size: 8pt;
+    line-height: 16pt;
+}
+
+.wrapper-little .content .con-list li:before {
+    content: '•';
+    display: inline-block;
+    width: 8pt;
+}
+
+.wrapper-little .content .section-price {
+    position: absolute;
+    bottom: -6px;
+    font-size: 8pt;
+    font-family: 'MP';
+}
+
+.wrapper-little .section-price .sign {
+    position: absolute;
+    top: 0;
+    left: -3pt;
+    font-size: 12pt;
+    font-style: normal;
+    color: #eb6717;
+}
+
+.wrapper-little .section-price .price {
+    font-size: 29pt;
+    padding-left: 8pt;
+    font-weight: 700;
+    line-height: 30pt;
+    color: #eb6717;
+}
+
+.wrapper-little .content .note {
+    font-size: 8pt;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-family: 'HY';
+}
+
+.wrapper-little .content .qrcode {
+    position: absolute;
+    width: 12mm;
+    height: 12mm;
+    right: 0;
+    bottom: 0;
+    background: #000;
+}

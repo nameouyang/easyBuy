@@ -1,0 +1,20 @@
+.article-group{
+	float: left;
+	display: none
+}
+
+.note-editable{
+        text-indent: 2em;
+        word-break: break-all;
+}
+
+.summernote-div{
+	border: 1px solid #a9a9a9;margin-bottom: 15px;box-shadow:0 0 3px rgba(0,0,0,.15);
+}
+.summernote{
+	width: 900px;height: 700px;
+}
+
+.article-read-confirm{
+	float: left;
+}

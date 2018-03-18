@@ -1,0 +1,13 @@
+/*-------------------------------------
+zTree的补充样式
+
+version:    1.0
+author:     Huang He
+email:      huanghe@xiaomi.com
+website:    https://oms.be.mi.com
+
+-------------------------------------*/
+
+.zTreeBg{
+    overflow-y: scroll;
+}

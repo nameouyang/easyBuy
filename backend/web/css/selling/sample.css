@@ -1,0 +1,218 @@
+/*
+ *.text-fix-width {
+ *    text-align:justify;
+ *    text-justify:distribute-all-lines;[>ie6-8<]
+ *    text-align-last:justify;[> ie9<]
+ *    -moz-text-align-last:justify;[>ff<]
+ *    -webkit-text-align-last:justify;[>chrome 20+<]
+ *}
+ *@media screen and (-webkit-min-device-pixel-ratio:0){[> chrome<]
+ *    .text-fix-width:after{
+ *        content:".";
+ *        display: inline-block;
+ *        width:100%;
+ *        overflow:hidden;
+ *        height:0;
+ *    }
+ *}
+ */
+        body{
+            margin:0;
+            padding:0;
+        }
+        p{
+            line-height: 20px;
+            margin: 0px auto;
+
+        }
+        hr{
+            border:1px dashed black; height:0
+        }
+       
+        img{max-width: 100%;}
+        
+        .container {
+            position:relative;
+            width:100%;
+        }
+        
+        .head_right {
+            width:100%;
+            float:left;
+            text-align:right;
+            font-size : 30px;
+            line-height:30px;
+            //background-color:white;
+            padding-right: 20px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+        .head_middle {
+            width:70%;
+            float:left;
+            text-align:right;
+            font-size : 100px;
+            line-height:230px;
+            //background-color:red;
+        }
+        .second_head {
+            width:100%;
+            text-align:center;
+        }
+        .info_right{
+            font-weight:bold;
+            float:left;
+            width:33%;
+        }
+        .info_middle{
+            font-weight:bold;
+            float:left;
+            width:33%;
+        }
+        .info_left{
+            font-weight:bold;
+            float:left;
+            width:34%;
+        }
+        .table_style {
+            border:1px solid black;
+            float:left;
+            width:100%;
+            //background-color:white;
+        }
+        .table_head {
+            font-weight:bold;
+        	line-height:30px;
+        	background-color:#D8D8D8;
+            text-indent: 1em;
+			width:10%;
+        }
+        .product_total_info {
+            float:right;
+            width:100%;
+            //background-color:white;
+            text-align:right;
+        }
+        .tips_info {
+            width:100%;
+            text-align:left;
+            //background-color: white;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        .font_size_first {
+            font-size : 25px;
+            line-height:50px;
+        }
+        .font_size_second {
+        }
+        p {
+            //line-height:10px;
+        }
+        .head_span{
+            //background-color: white;
+            
+            font-size: 20px;
+            margin-top: 0px;
+            padding-top: 0px;
+            padding-right: 20px;
+        }
+        
+        .table_body_key{
+        //	font-size: 18px;
+            font-weight:bold;
+        	line-height:30px;
+        	background-color:#D8D8D8;
+            text-indent: 1em;
+			width:10%;
+        }
+        .table_body_val{
+            text-indent:1em;
+			width:40%;
+        }
+        .table_body_item{
+            text-indent:1em;
+			width: 15%;
+			line-height:30px;
+        }
+
+        .table_body_item_special{
+            text-indent:1em;
+			width: 55%;
+			line-height:30px;
+        }
+        .table_body_remark_key{
+            text-indent:1em;
+            font-weight:bold; 
+        	line-height:30px;
+        	background-color:#D8D8D8;
+			width:10%;
+        }
+        .table_body_remark_val{
+        	width:85%;
+        }
+
+        textarea{
+			width: 100%;
+			height: 100%;
+        }
+
+        .table_body_transfer_key{
+            text-align: center;
+            font-size: 14px;
+            font-weight:bold;
+            line-height:30px;
+            background-color:#D8D8D8;
+            width:15%;
+        }
+        .table_body_transfer_val{
+            padding-left: 10px;
+            font-size:14px;
+            width:35%;
+        }
+
+        .table_head_transfer {
+            background-color:#D8D8D8;
+            font-weight:bold;
+            text-align: center;
+            font-size:14px;
+            /*width:20%;*/
+        }
+        .table_body_item_transfer {
+            text-align: center;
+            font-size:14px;
+            /*width:20%;*/
+        }
+        .table_body_transfer_key_bottom {
+            text-align: center;
+            font-weight:bold;
+            font-size: 14px;
+            line-height:30px;
+            background-color:#D8D8D8;
+            width:20%;
+        }
+        .table_body_transfer_val_bottom {
+            padding-left: 10px;
+            font-size:14px;
+        }
+
+        .header{
+            width:100%;
+            float:left;
+            height:60px;
+        }
+        .p1{
+            float:left;
+            text-align:right;
+            width:50%;
+            height:60px;
+            overflow:hidden;
+        }
+        .p2{
+            float:left;
+            text-align:right;
+            width:50%;
+            height:60px;
+            line-height:60px;
+        }
