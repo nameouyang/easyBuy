@@ -41,3 +41,5 @@ web/uploads/report/*
 modules/selling/controllers/TmpController.php
 
 tests
+
+backend/web/js/page
