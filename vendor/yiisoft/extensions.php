@@ -39,6 +39,15 @@ return array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
     ),
   ),
+    'yiisoft/yii2-redis' =>
+    array (
+        'name' => 'yiisoft/yii2-redis',
+        'version' => '9999999-dev',
+        'alias' =>
+            array (
+                '@yii/redis' => $vendorDir . '/yiisoft/yii2-redis',
+            ),
+    ),
   'yiisoft/yii2-gii' => 
   array (
     'name' => 'yiisoft/yii2-gii',

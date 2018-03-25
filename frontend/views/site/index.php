@@ -18,7 +18,7 @@ $this->registerJsFile('@web/js/switchable.js', ['depends' => \frontend\assets\Ap
             <li><a href=""><img src="/images/banner16.jpg" alt="" /></a></li>
             <li><a href=""><img src="/images/banner17.jpg" alt="" /></a></li>
             <li><a href=""><img src="/images/banner18.jpg" alt="" /></a></li>
-            <li><a href=""><img src="/images/banner20.gif" alt="" /></a></li>
+<!--            <li><a href=""><img src="/images/banner20.jpg" alt="" /></a></li>-->
         </ul>
         <div id="ico" class="ico">
             <a class="active" href="javascript:void(0);"></a>
