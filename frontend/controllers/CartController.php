@@ -16,19 +16,25 @@ use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
+require_once "../../common/vendors/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php";
+require_once "../../common/vendors/alipay/pagepay/service/AlipayTradeService.php";
+
+
 class CartController extends \frontend\components\Controller
 {
     public $layout = 'cart';
+
+    public $enableCsrfValidation = false;
 
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['checkout', 'address', 'pay', 'cod', 'json-coupon'],
+                'only' => ['checkout', 'address', 'pay', 'cod', 'json-coupon', 'ali-pay'],
                 'rules' => [
                     [
-                        'actions' => ['checkout', 'address', 'pay', 'cod', 'json-coupon'],
+                        'actions' => ['checkout', 'address', 'pay', 'cod', 'json-coupon', 'ali-pay'],
                         'allow' => true,
                         'roles' => ['@']
                     ]
@@ -428,6 +434,23 @@ class CartController extends \frontend\components\Controller
             'number' => $number,
         ];
 
+    }
+
+    public function actionAliPay()
+    {
+        $params  = Yii::$app->request->post();
+        $amount  = $params['amount'];
+        $tradeId = $params['trade-id'];
+
+        $alipay = new \AlipayTradePagePayContentBuilder();
+        $alipay->setOutTradeNo($tradeId);
+        $alipay->setTotalAmount($amount);
+        $alipay->setSubject($tradeId . '订单支付');
+
+        $config = Yii::$app->params['alipay'];
+        $serviceOnj = new \AlipayTradeService($config);
+        $res = $serviceOnj->pagePay($alipay, $config['return_url'], $config['notify_url']);
+        var_dump($res);
     }
 
 }

@@ -33,6 +33,7 @@ class OrderController extends \frontend\components\Controller
 
     public function actionIndex()
     {
+        $status = [];
         if (Yii::$app->request->get('status')) {
             $status = Yii::$app->request->get('status');
             if (strpos($status, ',')) {
@@ -50,9 +51,13 @@ class OrderController extends \frontend\components\Controller
             'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
         ]);
 
+        if (!is_array($status)) {
+            $status = [$status];
+        }
         return $this->render('index', [
             'orders' => $dataProvider->getModels(),
             'pagination' => $dataProvider->pagination,
+            'status' => $status,
         ]);
     }
 

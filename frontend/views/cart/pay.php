@@ -1,11 +1,16 @@
 <?php
 use common\models\Region;
+use frontend\assets\AppAsset;
 
 /* @var $this yii\web\View */
 $this->registerCssFile('@web/css/pay.css', ['depends' => \frontend\assets\AppAsset::className()]);
 $query = new \yii\db\Query();
 $result = $query->select('sum(number) as number')->from('order_product')->where(['order_id' => $model->id])->createCommand()->queryOne();
 $totalNumber = $result['number'];
+
+AppAsset::register($this);
+$this->registerJsFile('@web/js/page/pay/pay.js', ['depends' => \frontend\assets\AppAsset::className()]);
+
 ?>
 
 <div id="main">
@@ -35,14 +40,18 @@ $totalNumber = $result['number'];
             </div>
         </div>
     </div>
-    <form id="payform" target="_blank" name="payform" method="post" action="/trade/doPay">
+    <form id="payform" target="_blank" name="payform" method="post" action="ali-pay">
         <input type="hidden" id="org.codehaus.groovy.grails.SYNCHRONIZER_TOKEN" value="190410e2-616a-4d45-af9a-3e26bc883095" name="org.codehaus.groovy.grails.SYNCHRONIZER_TOKEN">
         <input type="hidden" id="org.codehaus.groovy.grails.SYNCHRONIZER_URI" value="/trade/checkout" name="org.codehaus.groovy.grails.SYNCHRONIZER_URI">
         <input type="hidden" id="org.codehaus.groovy.grails.SYNCHRONIZER_TOKEN" value="73fe148e-9d89-448c-9b81-426127a2467c" name="org.codehaus.groovy.grails.SYNCHRONIZER_TOKEN">
         <input type="hidden" id="org.codehaus.groovy.grails.SYNCHRONIZER_URI" value="/trade/checkout" name="org.codehaus.groovy.grails.SYNCHRONIZER_URI">
-        <input type="hidden" id="trade-id" value="15021661000005523738" name="id">
+
+        <input type="hidden" id="trade-id" value="<?= $model->sn ?>" name="trade-id">
+        <input type="hidden" id="amount" value="<?= $model->amount ?>" name="amount">
         <input type="hidden" id="fenqi_num" value="" name="fenqi_num">
-        <!-- 余额支付 -->
+
+        <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+
         <div id="pay-box" class="pay-box cle">
             <dl class="platform">
                 <dt><b>平台支付</b>支持所有银行卡或信用卡，更迅速、安全</dt>
@@ -50,7 +59,7 @@ $totalNumber = $result['number'];
                     <ul class="methods_info">
                         <li>
                             <div class="banks-bd selected">
-                                <input type="radio" onclick="ga('send','event','付款方式','click','支付宝');" value="ALIPAY" checked="checked" name="channel">
+                                <input id="zhifu" type="radio" value="ALIPAY" checked="checked" name="channel">
                                 <label class="zhifu"></label>
                             </div>
                             <p class="info">支持国内外160多家银行<br>
@@ -58,7 +67,7 @@ $totalNumber = $result['number'];
                         </li>
                         <li>
                             <div class="banks-bd">
-                                <input type="radio" value="ALIPAY_SM" name="channel">
+                                <input id="alipay_sm" type="radio" value="ALIPAY_SM" name="channel">
                                 <label class="alipay_sm"></label>
                             </div>
                             <p class="info">手机扫一扫，支付快捷又方便<br>
@@ -66,17 +75,17 @@ $totalNumber = $result['number'];
                         </li>
                         <li>
                             <div class="banks-bd">
-                                <input type="radio" onclick="ga('send','event','付款方式','click','财付通');" value="TENPAY" name="channel">
+                                <input id="cft" type="radio" value="TENPAY" name="channel">
                                 <label class="cft"></label>
                             </div>
-                            <p class="info vmid">支持60多家银行</p>
+                            <p class="info vmid">中国移动旗下支付平台</p>
                         </li>
                         <li>
                             <div class="banks-bd">
-                                <input type="radio" onclick="ga('send','event','付款方式','click','手机支付');" value="CMPAY" name="channel">
+                                <input id="shouji" type="radio"  value="CMPAY" name="channel">
                                 <label class="shouji"></label>
                             </div>
-                            <p class="info vmid">中国移动旗下支付平台</p>
+                            <p class="info vmid">支持60多家银行</p>
                         </li>
                     </ul>
                 </dd>
@@ -127,9 +136,16 @@ $totalNumber = $result['number'];
             </dl>
         </div>
     </form>
-    <div class="pay_line"> <span class="methods_info" id="pay-intro" style="display: inline-block;">使用
-    <label class="zhifu"></label>
-    支付<span class="red">￥<em><?= $model->amount ?></em></span></span> <a href="javascript:;" id="pay-btn" class="btn">去付款<i class="glyphicon glyphicon-chevron-right"></i></a> </div>
+    <div class="pay_line">
+        <span class="methods_info" id="pay-intro" style="display: inline-block;">使用
+            <label class="zhifu" id="pay_type"></label>
+            支付
+            <span class="red">￥<em><?= $model->amount ?></em></span>
+        </span>
+        <a href="javascript:;" id="pay-btn" class="btn">去付款
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>
+    </div>
 </div>
 
 <?php

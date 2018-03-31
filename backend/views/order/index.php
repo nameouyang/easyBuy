@@ -67,13 +67,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'consignee',
                     [
                         'attribute'      => 'address',
-                        'headerOptions'  => ['class' => 'col-th-19'],
+                        'headerOptions'  => ['class' => 'col-th-9'],
                         'contentOptions' => function ($model) {
                             $name = (isset($model->country0) ? $model->country0->name : '-') .
                                 (isset($model->province0) ? $model->province0->name : '-') .
                                 (isset($model->city0) ? $model->city0->name : '-') .
                                 (isset($model->district0) ? $model->district0->name : '-');
-                            return ['class'   => 'name-19 text-left',
+                            return ['class'   => 'name-9 text-left',
                                 'data-toggle' => 'tooltip',
                                 'title'       => Html::encode($name)
                             ];
@@ -141,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'contentOptions' => ['class' => 'text-center'],
-                        'headerOptions' => ['class' => 'col-th-12'],
+                        'headerOptions' => ['class' => 'col-th-9'],
                         'template' => ' {update} {delete} {view}',
                         'buttons' => [
                             'delete' => function ($url, $model) {

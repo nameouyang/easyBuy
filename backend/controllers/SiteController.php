@@ -9,6 +9,8 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
+require_once "../../common/vendors/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php";
+require_once "../../common/vendors/alipay/pagepay/service/AlipayTradeService.php";
 /**
  * Site controller
  */
@@ -162,5 +164,18 @@ class SiteController extends Controller
         return $this->render('changePassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionIndex1()
+    {
+        $alipay = new \AlipayTradePagePayContentBuilder();
+        $alipay->setOutTradeNo('SA999888777');
+        $alipay->setTotalAmount(10.00);
+        $alipay->setSubject('这里是订单标题');
+
+        $config = Yii::$app->params['alipay'];
+        $serviceOnj = new \AlipayTradeService($config);
+        $res = $serviceOnj->pagePay($alipay, $config['return_url'], $config['notify_url']);
+        var_dump($res);
     }
 }

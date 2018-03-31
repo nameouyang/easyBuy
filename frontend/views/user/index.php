@@ -1,4 +1,5 @@
 <?php
+use \common\models\Order;
 /* @var $this yii\web\View */
 $this->registerCssFile('@web/css/user.css', ['depends' => \frontend\assets\AppAsset::className()]);
 $this->registerCssFile('@web/css/favorite.css', ['depends' => \frontend\assets\AppAsset::className()]);
@@ -9,18 +10,18 @@ $i = 0;
 ?>
 
 <div class="ilizi cle">
-    <p><strong><?= Yii::$app->user->identity->username ?></strong>, 欢迎来到华之腾网上商城</p>
-    <p><span><i class="glyphicon glyphicon-usd"></i>我的积分：<?= Yii::$app->user->identity->point ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?= Yii::$app->urlManager->createUrl(['user/profile']) ?>"><i class="glyphicon glyphicon-user"></i>完善个人信息</a></p>
+    <p><strong><?= Yii::$app->user->identity->username ?></strong>, 欢迎来到易买网上商城</p>
+    <p><span><i class="glyphicon glyphicon-usd"></i>我的积分：<?= Yii::$app->user->identity->point ?></span><a href="<?= Yii::$app->urlManager->createUrl(['user/profile']) ?>" style="padding-left: 30px;"><i class="glyphicon glyphicon-user"></i>完善个人信息</a></p>
 </div>
 <div class="trade_mod i_marb">
     <div class="my_point">
         <h3 class="h301">
             <strong>我的订单</strong>
             <span class="link_order">
-                <a href="<?= Yii::$app->urlManager->createUrl(['order/index', 'status' => \common\models\Order::PAYMENT_STATUS_UNPAID]) ?>">待付款（<i>0</i>）</a>
-                | <a href="<?= Yii::$app->urlManager->createUrl(['order/index']) . '?status=' . \common\models\Order::PAYMENT_STATUS_COD . ',' . \common\models\Order::PAYMENT_STATUS_PAID ?>">待发货（<i>0</i>）</a>
-                | <a href="<?= Yii::$app->urlManager->createUrl(['order/index', 'status' => \common\models\Order::SHIPMENT_STATUS_SHIPPED]) ?>">待收货（<i>0</i>）</a>
-                | <a href="<?= Yii::$app->urlManager->createUrl(['order/index', 'status' => \common\models\Order::SHIPMENT_STATUS_RECEIVED]) ?>">待评价（<i>0</i>）</a>
+                <a href="<?= Yii::$app->urlManager->createUrl(['order/index', 'status' => Order::PAYMENT_STATUS_UNPAID]) ?>">待付款（<i><?php echo Order::getOrderStatusCount(Order::PAYMENT_STATUS_UNPAID)?></i>）</a>
+                | <a href="<?= Yii::$app->urlManager->createUrl(['order/index']) . '?status=' . Order::PAYMENT_STATUS_COD . ',' . Order::PAYMENT_STATUS_PAID ?>">待发货（<i><?=Order::getOrderStatusCount(Order::PAYMENT_STATUS_PAID)?></i>）</a>
+                | <a href="<?= Yii::$app->urlManager->createUrl(['order/index', 'status' => Order::SHIPMENT_STATUS_SHIPPED]) ?>">待收货（<i><?=Order::getOrderStatusCount(Order::SHIPMENT_STATUS_SHIPPED)?></i>）</a>
+                | <a href="<?= Yii::$app->urlManager->createUrl(['order/index', 'status' => Order::SHIPMENT_STATUS_RECEIVED]) ?>">待评价（<i><?=Order::getOrderStatusCount(Order::SHIPMENT_STATUS_RECEIVED)?></i>）</a>
             </span>
             <a class="r more" href="<?= Yii::$app->urlManager->createUrl(['order/index']) ?>">更多&gt;&gt;</a>
         </h3>

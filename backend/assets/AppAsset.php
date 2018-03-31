@@ -61,7 +61,7 @@ class AppAsset extends AssetBundle
         'js/utils.js',  // toastr
         'js/widget/ajax-search.js',  // toastr
 
-        'js/app.js',
+        //'js/app.js',
         // ajax -->
         //'libs/jquery/jquery-pjax/jquery.pjax.js',
         'libs/freezeheader/js/jquery.freezeheader.js',

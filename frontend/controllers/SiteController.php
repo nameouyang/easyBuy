@@ -74,7 +74,7 @@ class SiteController extends \frontend\components\Controller
          $source = Yii::$app->redis->get('var1');
          var_dump($source);die;*/
         $this->layout = 'main';
-        $products = Product::find()->orderBy(['created_at' => SORT_DESC])->limit(6)->all();
+        $products = Product::find()->orderBy(['created_at' => SORT_DESC])->orderBy('created_at', 'desc')->limit(6)->all();
         return $this->render('index', [
             'products' => $products,
         ]);

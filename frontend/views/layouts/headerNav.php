@@ -48,7 +48,13 @@ $totalNumber = $result['number'];
             <li><a target="_blank" href="<?= Yii::$app->homeUrl ?>">手机商城</a></li>
         </ul>
         <div class="hd_cart" id="head_cart">
-            <a class="tit" href="<?= Yii::$app->urlManager->createUrl(['/cart']) ?>"><b class="glyphicon glyphicon-shopping-cart"></b>去购物车结算<span><i class="glyphicon glyphicon-play"></i></span><em class="num" id="hd_cartnum" <?php if ($totalNumber > 0) { ?>style="visibility: visible"<?php } ?>><?= $totalNumber ?></em></a>
+            <a class="tit" href="<?= Yii::$app->urlManager->createUrl(['/cart']) ?>">
+                <b class="glyphicon glyphicon-shopping-cart"></b>去购物车结算
+                <span>
+                    <i class="glyphicon glyphicon-play"></i>
+                </span>
+                <em class="num" id="hd_cartnum" <?php if ($totalNumber > 0) { ?>style="visibility: visible"<?php } ?>><?= $totalNumber ?></em>
+            </a>
             <div class="list"><p class="load"></p></div>
         </div>
     </div>

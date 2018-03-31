@@ -12,7 +12,7 @@ foreach($products as $product) {
 <div id="main">
     <div class="top-next cle">
         <div class="fl"> 我有账号，现在就<a href="javascript:;" id="login-link">登录</a> </div>
-        <div class="fr"> <a href="http://www.mayicun.com/item/newsearch" class="graybtn">继续购物</a> <a href="javascript:;" class="btn" id="checkout-top">&nbsp;去下单&nbsp;</a> </div>
+        <div class="fr"> <a href="<?= Yii::$app->urlManager->createUrl(['product/search']) ?>" class="graybtn">继续购物</a> <a href="javascript:;" class="btn" id="checkout-top">&nbsp;去下单&nbsp;</a> </div>
     </div>
     <div class="cart-box" id="cart-box">
         <div class="hd">

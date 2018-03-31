@@ -38,8 +38,16 @@ class UserController extends \frontend\components\Controller
 
     public function actionIndex()
     {
-        $orders = Order::find()->where(['user_id' => Yii::$app->user->id])->limit(2)->all();
-
+     //   $orders = Order::find()->where(['user_id' => Yii::$app->user->id])->limit(2)->all();
+        $status = [
+            Order::PAYMENT_STATUS_UNPAID,
+            Order::PAYMENT_STATUS_COD,
+            Order::SHIPMENT_STATUS_SHIPPED,
+            Order::SHIPMENT_STATUS_RECEIVED
+        ];
+        $orders = Order::find()->where(['user_id' => Yii::$app->user->id,])->andWhere(['IN', 'status', $status])->all();
+        //$commandQuery = clone $orders;
+        //echo $commandQuery->createCommand()->getRawSql();die;
         $productIds = ArrayHelper::map(Favorite::find()->where(['user_id' => Yii::$app->user->id])->orderBy(['id' => SORT_DESC])->asArray()->all(), 'product_id', 'product_id');
         if (count($productIds)) {
             $favorites = Product::find()->where(['id' => $productIds])->limit(5)->all();

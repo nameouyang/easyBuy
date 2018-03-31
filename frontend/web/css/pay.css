@@ -237,8 +237,14 @@
 .methods_info label.bohai {
     background-position:0 -450px
 }
+.methods_info label.shouji {
+    background-position:-2px -940px
+}
 .methods_info label.zhifu {
     background-position:-2px -992px
+}
+.methods_info label.alipay_sm {
+    background-position:-2px -1045px
 }
 .methods_info label.cft {
     background-position:-2px -1100px
@@ -246,7 +252,7 @@
 .methods_info label.wyzx {
     background-position:6px -940px
 }
-.methods_info .banks-bd .ka-type {
+/*.methods_info .banks-bd .ka-type {
     position:absolute;
     right:0;
     top:0;
@@ -286,7 +292,7 @@
 }
 .methods_info label.shouji {
     background-position:0 -135px
-}
+}*/
 .pay-box {
     border:1px solid #ccc;
     background-color:#fff

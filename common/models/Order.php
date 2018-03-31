@@ -47,22 +47,22 @@ use yii\behaviors\TimestampBehavior;
  */
 class Order extends \yii\db\ActiveRecord
 {
-    const STATUS_CANCEL  = -1;
-    const STATUS_DELETED = -2;
+    const STATUS_CANCEL  = -1;//已取消
+    const STATUS_DELETED = -2;//删除
 
-    const PAYMENT_METHOD_PAY = 1;
-    const PAYMENT_METHOD_COD = 2;
+    const PAYMENT_METHOD_PAY = 1;//在线支付
+    const PAYMENT_METHOD_COD = 2;//货到付款
 
-    const PAYMENT_STATUS_COD    = 10;
-    const PAYMENT_STATUS_UNPAID = 20;
-    const PAYMENT_STATUS_PAYING = 30;
-    const PAYMENT_STATUS_PAID   = 40;
+    const PAYMENT_STATUS_COD    = 10;//货到付款
+    const PAYMENT_STATUS_UNPAID = 20;//未付款
+    const PAYMENT_STATUS_PAYING = 30;//正在付款
+    const PAYMENT_STATUS_PAID   = 40;//已付款
 
-    const SHIPMENT_STATUS_UNSHIPPED = 60;
-    const SHIPMENT_STATUS_PREPARING = 70;
-    const SHIPMENT_STATUS_SHIPPED   = 80;
-    const SHIPMENT_STATUS_RECEIVED  = 90;
-
+    const SHIPMENT_STATUS_UNSHIPPED = 60;//未发货
+    const SHIPMENT_STATUS_PREPARING = 70;//准备发货
+    const SHIPMENT_STATUS_SHIPPED   = 80;//已发货
+    const SHIPMENT_STATUS_RECEIVED  = 90;//已收货
+//-1-已取消  -2-删除  1-在线支付  2-货到付款  10-货到付款  20-未付款  30-正在付款  40-已付款  60-未发货  70-准备发货  80-已发货  90-已收货
     public $address_id;
 
     /**
@@ -224,16 +224,16 @@ class Order extends \yii\db\ActiveRecord
     public static function getStatusLabels($id = null)
     {
         $data = [
-            self::STATUS_CANCEL             => Yii::t('app', 'STATUS_CANCEL'),
-            self::STATUS_DELETED            => Yii::t('app', 'STATUS_DELETED'),
-            self::PAYMENT_STATUS_COD        => Yii::t('app', 'PAYMENT_STATUS_COD'),
-            self::PAYMENT_STATUS_UNPAID     => Yii::t('app', 'PAYMENT_STATUS_UNPAID'),
-            self::PAYMENT_STATUS_PAYING     => Yii::t('app', 'PAYMENT_STATUS_PAYING'),
-            self::PAYMENT_STATUS_PAID       => Yii::t('app', 'PAYMENT_STATUS_PAID'),
-            self::SHIPMENT_STATUS_UNSHIPPED => Yii::t('app', 'SHIPMENT_STATUS_UNSHIPPED'),
-            self::SHIPMENT_STATUS_PREPARING => Yii::t('app', 'SHIPMENT_STATUS_PREPARING'),
-            self::SHIPMENT_STATUS_SHIPPED   => Yii::t('app', 'SHIPMENT_STATUS_SHIPPED'),
-            self::SHIPMENT_STATUS_RECEIVED  => Yii::t('app', 'SHIPMENT_STATUS_RECEIVED'),
+            self::STATUS_CANCEL             => Yii::t('app', 'STATUS_CANCEL'),//已取消
+            self::STATUS_DELETED            => Yii::t('app', 'STATUS_DELETED'),//删除
+            self::PAYMENT_STATUS_COD        => Yii::t('app', 'PAYMENT_STATUS_COD'),//货到付款
+            self::PAYMENT_STATUS_UNPAID     => Yii::t('app', 'PAYMENT_STATUS_UNPAID'),//未付款
+            self::PAYMENT_STATUS_PAYING     => Yii::t('app', 'PAYMENT_STATUS_PAYING'),//正在付款
+            self::PAYMENT_STATUS_PAID       => Yii::t('app', 'PAYMENT_STATUS_PAID'),//已付款
+            self::SHIPMENT_STATUS_UNSHIPPED => Yii::t('app', 'SHIPMENT_STATUS_UNSHIPPED'),//未发货
+            self::SHIPMENT_STATUS_PREPARING => Yii::t('app', 'SHIPMENT_STATUS_PREPARING'),//准备发货
+            self::SHIPMENT_STATUS_SHIPPED   => Yii::t('app', 'SHIPMENT_STATUS_SHIPPED'),//已发货
+            self::SHIPMENT_STATUS_RECEIVED  => Yii::t('app', 'SHIPMENT_STATUS_RECEIVED'),//已收货
         ];
 
         if ($id !== null && isset($data[$id])) {
@@ -270,6 +270,12 @@ class Order extends \yii\db\ActiveRecord
             return $data[$id];
         }
         return $data;
+    }
+
+    public static function getOrderStatusCount($status)
+    {
+        $count =  self::find()->where(['user_id' => Yii::$app->user->id, 'status' => $status])->count();
+        return $count;
     }
 
     /**

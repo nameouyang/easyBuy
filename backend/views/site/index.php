@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-$this->title = 'Welcome To easy buy';
+$this->title = '欢迎进入 easy buy 后台管理';
 ?>
 
 <style>
