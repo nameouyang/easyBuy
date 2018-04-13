@@ -36,6 +36,7 @@ class AppAsset extends AssetBundle
         'css/font.css',
     ];
     public $js = [
+        'libs/jquery/jquery/dist/jquery.js',
         'libs/jquery/tether/dist/js/tether.min.js',
         //'libs/jquery/bootstrap/dist/js/bootstrap.js',
         //'libs/jquery/bootstrap/dist/js/bootstrap.js',
@@ -69,7 +70,7 @@ class AppAsset extends AssetBundle
         'js/voice.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        //'yii\web\YiiAsset',
+        //'yii\bootstrap\BootstrapAsset',
     ];
 }

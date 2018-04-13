@@ -117,6 +117,9 @@ class SiteController extends Controller
         $result                     = $query->select('count(*) as count')->from('user')->where(['and', 'created_at > ' . $thisMonthStart . '', 'created_at <= ' . $thisMonthEnd])->createCommand()->queryOne();
         $dataUser['thisMonthCount'] = $result['count'];
 
+        $result                     = $query->select('count(*) as count')->from('user')->where( 'created_at<=' .$thisMonthEnd)->createCommand()->queryOne();
+        $dataUser['otherCount'] = $result['count'];
+
         return $this->render('index', [
             'dataOrder' => $dataOrder,
             'dataUser'  => $dataUser,

@@ -64,7 +64,7 @@ body {
 	bottom: 10px;
 	z-index: 1;
 }
-#index-slide .ico a {
+/*#index-slide .ico a {
 	display: inline-block;
 	width: 10px;
 	height:10px;
@@ -73,8 +73,19 @@ body {
 }
 #index-slide .ico .active {
 	background: url() no-repeat 0px 0px;
-}
+}*/
+
+/*轮播图左箭头*/
 #btnLeft {
+	width: 128px;
+	height: 128px;
+	left: 10px;
+	top: 140px;
+	background: url('') no-repeat 0px 0px;
+	position: absolute;
+	z-index: 2;
+}
+#btnLeft:hover {
 	width: 128px;
 	height: 128px;
 	left: 10px;
@@ -83,10 +94,17 @@ body {
 	position: absolute;
 	z-index: 2;
 }
-#btnLeft :hover {
-	background: url() no-repeat 0px 0px;
-}
+/*轮播图右箭头*/
 #btnRight {
+	width: 128px;
+	height: 128px;
+	right: 10px;
+	top: 140px;
+	background: url() no-repeat 0px 0px;
+	position: absolute;
+	z-index: 2;
+}
+#btnRight:hover {
 	width: 128px;
 	height: 128px;
 	right: 10px;
@@ -94,10 +112,6 @@ body {
 	background: url(../images/arrow-right.png) no-repeat 0px 0px;
 	position: absolute;
 	z-index: 2;
-}
-#btnRight :hover {
-	background: url() no-repeat 0px 0px;
-
 }
 
 
@@ -328,9 +342,11 @@ body {
 	height:50px;
 	vertical-align:top
 }
+/*主页商品下面 跳一下效果*/
 .series_info .brand li img:hover {
 	-webkit-animation:imgShark 1s
 }
+
 .series_info .brand_cata {
 	padding:12px 0 10px 20px;
 	height:73px;
@@ -428,6 +444,25 @@ body {
 	height:120px;
 	vertical-align:top
 }
+
+/*主页主商品鼠标放上去放大效果*/
+.series_list .pro_list li .pic img  {
+	width:120px;
+	height:120px;
+	vertical-align:top;
+	-webkit-transition:all 4s;
+	-moz-transition:all 4s;
+	-ms-transition:all 4s;
+	-o-transition:all 4s;
+	transition:all 4s;
+	-webkit-transform:scale(1)
+}
+
+.series_list .pro_list li .pic img:hover {
+	-webkit-transform:scale(1.08)
+}
+
+
 .series_list .pro_list li h3 {
 	color:#666;
 	font-size:12px;

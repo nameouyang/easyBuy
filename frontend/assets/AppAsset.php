@@ -34,32 +34,39 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/jquery.js',
-/*
-        'backend/web/libs/jquery/tether/dist/js/tether.min.js',
-        'backend/web/libs/js/toastr/toastr.min.js',  // toastr
-        'backend/web/libs/jquery/screenfull/dist/screenfull.min.js',
-        'backend/web/libs/jquery/underscore/underscore-min.js',
-        'backend/web/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js',
-        'backend/web/libs/jquery/PACE/pace.min.js',
-        'backend/web/libs/jquery/select2/dist/js/select2.min.js',
-        'backend/web/libs/jquery/select2/dist/js/i18n/zh-CN.js',
-        'backend/web/js/config.lazyload.js',
-        'backend/web/js/palette.js',
-        'backend/web/js/ui-load.js',
-        'backend/web/js/ui-jp.js',
-        'backend/web/js/ui-include.js',
-        'backend/web/js/ui-device.js',
-        'backend/web/js/ui-form.js',
-        'backend/web/js/ui-nav.js',
-        'backend/web/js/ui-screenfull.js',
-        'backend/web/js/ui-scroll-to.js',
-        'backend/web/js/ui-toggle-class.js',
-        'backend/web/js/utils.js',  // toastr
-        'backend/web/js/widget/ajax-search.js',  // toastr
 
-        'backend/web/js/app.js',
-        'backend/web/libs/freezeheader/js/jquery.freezeheader.js',
-        'backend/web/js/ajax.js',*/
+        'libs/jquery/tether/dist/js/tether.min.js',
+        //'libs/jquery/bootstrap/dist/js/bootstrap.js',
+        //'libs/jquery/bootstrap/dist/js/bootstrap.js',
+        // core -->
+        'libs/js/toastr/toastr.min.js',  // toastr
+        'libs/jquery/screenfull/dist/screenfull.min.js',
+        'libs/jquery/underscore/underscore-min.js',
+        'libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js',
+        'libs/jquery/PACE/pace.min.js',
+        'libs/jquery/select2/dist/js/select2.min.js',
+        'libs/jquery/select2/dist/js/i18n/zh-CN.js',
+
+        'js/utils.js',  // toastr
+
+        /*'js/config.lazyload.js',
+        'js/palette.js',
+        'js/ui-load.js',
+        'js/ui-jp.js',
+        'js/ui-include.js',
+        'js/ui-device.js',
+        'js/ui-form.js',
+        'js/ui-nav.js',
+        'js/ui-screenfull.js',
+        'js/ui-scroll-to.js',
+        'js/ui-toggle-class.js',
+        'js/utils.js',  // toastr
+        'js/widget/ajax-search.js',  // toastr
+
+
+        'libs/freezeheader/js/jquery.freezeheader.js',
+        'js/ajax.js',
+        'js/voice.js',*/
 
         //'js/global.js',
     ];

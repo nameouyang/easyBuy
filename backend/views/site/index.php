@@ -1,7 +1,11 @@
 <?php
 /* @var $this yii\web\View */
+use \backend\assets\AppAsset;
 
-$this->title = '欢迎进入 easy buy 后台管理';
+AppAsset::register($this);
+$this->registerJsFile('@web/js/page/site/index.js', ['depends' => AppAsset::className()]);
+
+$this->title = '<h2>欢迎进入 easy buy 后台管理</h2>';
 ?>
 
 <style>
@@ -29,9 +33,9 @@ $this->title = '欢迎进入 easy buy 后台管理';
     }
 
 </style>
-<div class="site-index">
-    <p><?= Yii::t('app', 'Order Stat') ?></p>
-    <table class="table table-striped table-bordered">
+<div class="site-index" style="margin:50px 50px 0 50px">
+    <h4><?= Yii::t('app', 'Order Stat') ?></h4>
+    <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
             <th>&nbsp;</th>
@@ -46,28 +50,41 @@ $this->title = '欢迎进入 easy buy 后台管理';
         <tbody>
             <tr data-key="1">
                 <td ><?= Yii::t('app', 'Count') ?></td>
-                <td><span class="label rounded color1" ><?= $dataOrder['todayCount'] ?></span></td>
-                <td><span class="label rounded color2" ><?= $dataOrder['yesterdayCount'] ?></span></td>
-                <td><span class="label rounded color3" ><?= $dataOrder['lastWeekCount'] ?></span></td>
-                <td><span class="label rounded color4" ><?= $dataOrder['thisWeekCount'] ?></span></td>
-                <td><span class="label rounded color5" ><?= $dataOrder['lastMonthCount'] ?></span></td>
-                <td><span class="label rounded color6" ><?= $dataOrder['thisMonthCount'] ?></span></td>
+                <td><span class="label rounded color1" id = "todayCountDD"><?= $dataOrder['todayCount'] ?></span></td>
+                <td><span class="label rounded color2" id = "yesterdayCountDD"><?= $dataOrder['yesterdayCount'] ?></span></td>
+                <td><span class="label rounded color3" id = "lastWeekCountDD"><?= $dataOrder['lastWeekCount'] ?></span></td>
+                <td><span class="label rounded color4" id = "thisWeekCountDD"><?= $dataOrder['thisWeekCount'] ?></span></td>
+                <td><span class="label rounded color5" id = "lastMonthCountDD"><?= $dataOrder['lastMonthCount'] ?></span></td>
+                <td><span class="label rounded color6" id = "thisMonthCountDD"><?= $dataOrder['thisMonthCount'] ?></span></td>
             </tr>
             <tr data-key="1">
                 <td><?= Yii::t('app', 'Amount') ?></td>
-                <td><span class="label rounded color1" ><?= $dataOrder['todayAmount'] ?></span></td>
-                <td><span class="label rounded color2" ><?= $dataOrder['yesterdayAmount'] ?></span></td>
-                <td><span class="label rounded color3" ><?= $dataOrder['lastWeekAmount'] ?></span></td>
-                <td><span class="label rounded color4" ><?= $dataOrder['thisWeekAmount'] ?></span></td>
-                <td><span class="label rounded color5" ><?= $dataOrder['lastMonthAmount'] ?></span></td>
-                <td><span class="label rounded color6" ><?= $dataOrder['thisMonthAmount'] ?></span></td>
+                <td><span class="label rounded color1" id = "todayAmount"><?= $dataOrder['todayAmount'] ?></span></td>
+                <td><span class="label rounded color2" id = "yesterdayAmount"><?= $dataOrder['yesterdayAmount'] ?></span></td>
+                <td><span class="label rounded color3" id = "lastWeekAmount"><?= $dataOrder['lastWeekAmount'] ?></span></td>
+                <td><span class="label rounded color4" id = "thisWeekAmount"><?= $dataOrder['thisWeekAmount'] ?></span></td>
+                <td><span class="label rounded color5" id = "lastMonthAmount"><?= $dataOrder['lastMonthAmount'] ?></span></td>
+                <td><span class="label rounded color6" id = "thisMonthAmount"><?= $dataOrder['thisMonthAmount'] ?></span></td>
             </tr>
         </tbody>
     </table>
 </div>
-<div class="site-index">
-    <p><?= Yii::t('app', 'User Stat') ?></p>
-    <table class="table table-striped table-bordered">
+
+<div height="400" width="600" style="margin:50px; float: left">
+    <canvas id="barChart"> 你的浏览器不支持HTML5 canvas </canvas>
+    <h5 style="text-align: center">订单数统计</h5>
+</div>
+
+<div height="400" width="600" style="margin:50px; float: right">
+    <canvas id="barChartAll"> 你的浏览器不支持HTML5 canvas </canvas>
+    <h5 style="text-align: center;">销售额统计</h5>
+</div>
+<div style="clear: both;">
+
+</div>
+<div class="site-index" style="margin:50px 50px 0 50px">
+    <h4><?= Yii::t('app', 'User Stat') ?></h4>
+    <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
             <th>&nbsp;</th>
@@ -77,18 +94,29 @@ $this->title = '欢迎进入 easy buy 后台管理';
             <th><?= Yii::t('app', 'This Week') ?></th>
             <th><?= Yii::t('app', 'Last Month') ?></th>
             <th><?= Yii::t('app', 'This Month') ?></th>
+            <th>其他</th>
         </tr>
         </thead>
         <tbody>
             <tr data-key="1">
                 <td><?= Yii::t('app', 'Count') ?></td>
-                <td><span class="label rounded color1" ><?= $dataUser['todayCount'] ?></span></td>
-                <td><span class="label rounded color2" ><?= $dataUser['yesterdayCount'] ?></span></td>
-                <td><span class="label rounded color3" ><?= $dataUser['lastWeekCount'] ?></span></td>
-                <td><span class="label rounded color4" ><?= $dataUser['thisWeekCount'] ?></span></td>
-                <td><span class="label rounded color5" ><?= $dataUser['lastMonthCount'] ?></span></td>
-                <td><span class="label rounded color6" ><?= $dataUser['thisMonthCount'] ?></span></td>
+                <td><span class="label rounded color1" id = "todayCount"><?= $dataUser['todayCount'] ?></span></td>
+                <td><span class="label rounded color2" id = "yesterdayCount"><?= $dataUser['yesterdayCount'] ?></span></td>
+                <td><span class="label rounded color3" id = "lastWeekCount"><?= $dataUser['lastWeekCount'] ?></span></td>
+                <td><span class="label rounded color4" id = "thisWeekCount"><?= $dataUser['thisWeekCount'] ?></span></td>
+                <td><span class="label rounded color5" id = "lastMonthCount"><?= $dataUser['lastMonthCount'] ?></span></td>
+                <td><span class="label rounded color6" id = "thisMonthCount"><?= $dataUser['thisMonthCount'] ?></span></td>
+                <td><span class="label rounded color1" id = "otherCount"><?= $dataUser['otherCount'] ?></span></td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
+<div height="400" width="600" style="margin:50px; text-align: center">
+    <canvas id="chart"> 你的浏览器不支持HTML5 canvas </canvas>
+    <h5 style="text-align: center;">用户注册统计</h5>
+</div>
+
+<div id="chartK" height="500" width="1200" style="margin:30px;"></div>
+

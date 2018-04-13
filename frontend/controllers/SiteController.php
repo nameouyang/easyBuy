@@ -1,4 +1,40 @@
 <?php
+
+/**
+ *                             _ooOoo_
+ *                            o8888888o
+ *                            88" . "88
+ *                            (| -_- |)
+ *                            O\  =  /O
+ *                         ____/`---'\____
+ *                       .'  \\|     |//  `.
+ *                      /  \\|||  :  |||//  \
+ *                     /  _||||| -:- |||||-  \
+ *                     |   | \\\  -  /// |   |
+ *                     | \_|  ''\---/''  |   |
+ *                     \  .-\__  `-`  ___/-. /
+ *                   ___`. .'  /--.--\  `. . __
+ *                ."" '<  `.___\_<|>_/___.'  >'"".
+ *               | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *               \  \ `-.   \_ __\ /__ _/   .-` /  /
+ *          ======`-.____`-.___\_____/___.-`____.-'======
+ *                             `=---='
+ *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *                     佛祖保佑        永无BUG
+ *            佛曰:
+ *                   写字楼里写字间，写字间里程序员；
+ *                   程序人员写程序，又拿程序换酒钱。
+ *                   酒醒只在网上坐，酒醉还来网下眠；
+ *                   酒醉酒醒日复日，网上网下年复年。
+ *                   但愿老死电脑间，不愿鞠躬老板前；
+ *                   奔驰宝马贵者趣，公交自行程序员。
+ *                   别人笑我忒疯癫，我笑自己命太贱；
+ *                   不见满街漂亮妹，哪个归得程序员？
+ *
+ *            Created by PhpStorm.
+ *            User: ouyangjiang
+ */
+
 namespace frontend\controllers;
 
 use common\models\Product;
@@ -29,15 +65,15 @@ class SiteController extends \frontend\components\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup', 'change-password'],
+                'only' => ['logout', 'signup', 'change-password', 'get-email-code'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'get-email-code'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'change-password'],
+                        'actions' => ['logout', 'change-password', 'get-email-code'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -130,14 +166,30 @@ class SiteController extends \frontend\components\Controller
         return $this->render('about');
     }
 
+    /**
+     * 注册
+    */
     public function actionSignup()
     {
         $model = new SignupForm();
+        //$post = Yii::$app->request->post();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                /*if (Yii::$app->getUser()->login($user)) {
+                    //return $this->goHome();
+                }*/
+                Yii::$app->getUser()->login($user);
+                self::json(200, '注册成功', []);
+            } else {
+                $errors = $model->getErrors();
+                $errData = '';
+
+                foreach ($errors as $error) {
+                    foreach ($error as $data) {
+                        $errData .= $data . '   ';
+                    }
                 }
+                self::json(1001, '注册失败' , ['data'=>$errData]);
             }
         }
 
@@ -233,9 +285,36 @@ class SiteController extends \frontend\components\Controller
         }
     }
 
+    /**
+     * 发送验证码到邮箱
+    */
+    public function actionGetEmailCode()
+    {
+        if ($post = Yii::$app->request->post()) {
+            $email = $post['email'];
+            $code = rand(100000, 999999);
+            PasswordResetRequestForm::sendEmailCode($email, $code);
+            self::json(200, 'success', ['code'=>$code]);
+        } else {
+            self::json(1001, 'error', []);
+        }
+    }
+
     public function actionTest()
     {
         $index = 'test';
+        var_dump($index);
 
+    }
+
+    /**
+     * ajax请求返回json数据
+    */
+    public static function json($code, $msg= '', $data = [])
+    {
+        $response = ['code' => $code, 'msg'=> $msg, 'data' => $data];
+        header('Content-type: application/json;charset=utf-8');
+        echo(json_encode($response, JSON_UNESCAPED_UNICODE)); //unicode不转码
+        exit;
     }
 }

@@ -1,15 +1,50 @@
 <?php
 
+/**
+ *                             _ooOoo_
+ *                            o8888888o
+ *                            88" . "88
+ *                            (| -_- |)
+ *                            O\  =  /O
+ *                         ____/`---'\____
+ *                       .'  \\|     |//  `.
+ *                      /  \\|||  :  |||//  \
+ *                     /  _||||| -:- |||||-  \
+ *                     |   | \\\  -  /// |   |
+ *                     | \_|  ''\---/''  |   |
+ *                     \  .-\__  `-`  ___/-. /
+ *                   ___`. .'  /--.--\  `. . __
+ *                ."" '<  `.___\_<|>_/___.'  >'"".
+ *               | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *               \  \ `-.   \_ __\ /__ _/   .-` /  /
+ *          ======`-.____`-.___\_____/___.-`____.-'======
+ *                             `=---='
+ *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *                     佛祖保佑        永无BUG
+ *            佛曰:
+ *                   写字楼里写字间，写字间里程序员；
+ *                   程序人员写程序，又拿程序换酒钱。
+ *                   酒醒只在网上坐，酒醉还来网下眠；
+ *                   酒醉酒醒日复日，网上网下年复年。
+ *                   但愿老死电脑间，不愿鞠躬老板前；
+ *                   奔驰宝马贵者趣，公交自行程序员。
+ *                   别人笑我忒疯癫，我笑自己命太贱；
+ *                   不见满街漂亮妹，哪个归得程序员？
+ *
+ *            Created by PhpStorm.
+ *            User: ouyangjiang
+ */
+
 namespace frontend\controllers;
 
 use common\models\Coupon;
+use common\models\Favorite;
 use common\models\Order;
 use common\models\PointLog;
 use common\models\Product;
 use common\models\Profile;
 use frontend\models\ChangePasswordForm;
 use Yii;
-use common\models\Favorite;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -38,43 +73,67 @@ class UserController extends \frontend\components\Controller
 
     public function actionIndex()
     {
-     //   $orders = Order::find()->where(['user_id' => Yii::$app->user->id])->limit(2)->all();
+        //   $orders = Order::find()->where(['user_id' => Yii::$app->user->id])->limit(2)->all();
         $status = [
             Order::PAYMENT_STATUS_UNPAID,
             Order::PAYMENT_STATUS_COD,
             Order::SHIPMENT_STATUS_SHIPPED,
             Order::SHIPMENT_STATUS_RECEIVED
         ];
-        $orders = Order::find()->where(['user_id' => Yii::$app->user->id,])->andWhere(['IN', 'status', $status])->all();
-        //$commandQuery = clone $orders;
-        //echo $commandQuery->createCommand()->getRawSql();die;
-        $productIds = ArrayHelper::map(Favorite::find()->where(['user_id' => Yii::$app->user->id])->orderBy(['id' => SORT_DESC])->asArray()->all(), 'product_id', 'product_id');
+        $orders = Order::find()
+            ->where(['user_id' => Yii::$app->user->id])
+            ->andWhere(['IN', 'status', $status])
+            ->all();
+
+
+        /*
+         * 打印sql语速
+        $commandQuery = clone $orders;
+        echo $commandQuery->createCommand()->getRawSql();die;*/
+
+        $productIds = ArrayHelper::map(Favorite::find()
+            ->where(['user_id' => Yii::$app->user->id])
+            ->orderBy(['id' => SORT_DESC])
+            ->asArray()
+            ->all(),
+            'product_id',
+            'product_id');
         if (count($productIds)) {
-            $favorites = Product::find()->where(['id' => $productIds])->limit(5)->all();
+            $favorites = Product::find()
+                ->where(['id' => $productIds])->limit(5)
+                ->all();
         }
 
-        $coupons = Coupon::find()->where(['and', 'user_id = ' . Yii::$app->user->id, 'used_at = 0', 'ended_at >= ' . time()])->all();
+        $coupons = Coupon::find()
+            ->where(['and', 'user_id = ' . Yii::$app->user->id, 'used_at = 0', 'ended_at >= ' . time()])
+            ->all();
 
         return $this->render('index', [
-            'orders' => $orders,
+            'orders'    => $orders,
             'favorites' => isset($favorites) ? $favorites : null,
-            'coupons' => $coupons,
+            'coupons'   => $coupons,
         ]);
     }
 
     public function actionFavorite()
     {
-        $productIds = ArrayHelper::map(Favorite::find()->where(['user_id' => Yii::$app->user->id])->orderBy(['id' => SORT_DESC])->asArray()->all(), 'product_id', 'product_id');
+        $productIds = ArrayHelper::map(Favorite::find()
+            ->where(['user_id' => Yii::$app->user->id])
+            ->orderBy(['id' => SORT_DESC])
+            ->asArray()
+            ->all(),
+            'product_id',
+            'product_id');
         if (count($productIds)) {
-            $query = Product::find()->where(['id' => $productIds]);
+            $query        = Product::find()->where(['id' => $productIds]);
             $dataProvider = new ActiveDataProvider([
-                'query' => $query,
+                'query'      => $query,
                 'pagination' => ['defaultPageSize' => Yii::$app->params['defaultPageSizeOrder']],
-                'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
+                'sort'       => ['defaultOrder' => ['created_at' => SORT_DESC]],
             ]);
 
             return $this->render('favorite', [
-                'products' => $dataProvider->getModels(),
+                'products'   => $dataProvider->getModels(),
                 'pagination' => $dataProvider->pagination,
             ]);
         }
@@ -104,15 +163,15 @@ class UserController extends \frontend\components\Controller
 
     public function actionPointLog()
     {
-        $query = PointLog::find()->where(['user_id' => Yii::$app->user->id]);
+        $query        = PointLog::find()->where(['user_id' => Yii::$app->user->id]);
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
             'pagination' => ['defaultPageSize' => Yii::$app->params['defaultPageSizeOrder']],
-            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
+            'sort'       => ['defaultOrder' => ['created_at' => SORT_DESC]],
         ]);
 
         return $this->render('point-log', [
-            'models' => $dataProvider->getModels(),
+            'models'     => $dataProvider->getModels(),
             'pagination' => $dataProvider->pagination,
         ]);
     }
@@ -128,13 +187,13 @@ class UserController extends \frontend\components\Controller
             $query = Coupon::find()->where(['and', 'user_id = ' . Yii::$app->user->id, 'ended_at < ' . $now]);
         }
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
             'pagination' => ['defaultPageSize' => Yii::$app->params['defaultPageSizeOrder']],
-            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
+            'sort'       => ['defaultOrder' => ['created_at' => SORT_DESC]],
         ]);
 
         return $this->render('coupon', [
-            'models' => $dataProvider->getModels(),
+            'models'     => $dataProvider->getModels(),
             'pagination' => $dataProvider->pagination,
         ]);
     }
@@ -143,20 +202,20 @@ class UserController extends \frontend\components\Controller
     {
         $model = Profile::findOne(['user_id' => Yii::$app->user->id]);
         if (!$model) {
-            $model = new Profile();
+            $model          = new Profile();
             $model->user_id = Yii::$app->user->id;
         }
 
         if ($model->birthday) {
-            $model->year = substr($model->birthday, 0, 4);
+            $model->year  = substr($model->birthday, 0, 4);
             $model->month = substr($model->birthday, 5, 2);
-            $model->day = substr($model->birthday, 8, 2);
+            $model->day   = substr($model->birthday, 8, 2);
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->year = intval(Yii::$app->request->post()['Profile']['year']);
+            $model->year  = intval(Yii::$app->request->post()['Profile']['year']);
             $model->month = intval(Yii::$app->request->post()['Profile']['month']);
-            $model->day = intval(Yii::$app->request->post()['Profile']['day']);
+            $model->day   = intval(Yii::$app->request->post()['Profile']['day']);
             if ($model->year || $model->month || $model->day) {
                 $model->birthday = date('Y-m-d H:i:s', mktime(0, 0, 0, $model->month, $model->day, $model->year));
             }
@@ -184,5 +243,4 @@ class UserController extends \frontend\components\Controller
             'status' => -1,
         ];
     }
-
 }

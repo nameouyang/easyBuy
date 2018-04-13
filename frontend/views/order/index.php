@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 AppAsset::register($this);
 
-$this->registerJsFile('@web/js/page/order/index.js', ['depends' => \frontend\assets\AppAsset::className()]);
+$this->registerJsFile('@web/js/page/order/index.js', ['depends' => AppAsset::className()]);
 
 ?>
 

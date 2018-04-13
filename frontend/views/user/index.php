@@ -1,8 +1,11 @@
 <?php
-use \common\models\Order;
+
+use common\models\Order;
+use frontend\assets\AppAsset;
 /* @var $this yii\web\View */
-$this->registerCssFile('@web/css/user.css', ['depends' => \frontend\assets\AppAsset::className()]);
-$this->registerCssFile('@web/css/favorite.css', ['depends' => \frontend\assets\AppAsset::className()]);
+$this->registerCssFile('@web/css/user.css', ['depends' => AppAsset::className()]);
+$this->registerCssFile('@web/css/favorite.css', ['depends' => AppAsset::className()]);
+$this->registerJsFile('@web/js/page/user/index.js', ['depends' => AppAsset::className()]);
 
 $this->title = Yii::t('app', 'User Center');
 $this->params['breadcrumbs'][] = $this->title;
@@ -10,8 +13,21 @@ $i = 0;
 ?>
 
 <div class="ilizi cle">
-    <p><strong><?= Yii::$app->user->identity->username ?></strong>, 欢迎来到易买网上商城</p>
-    <p><span><i class="glyphicon glyphicon-usd"></i>我的积分：<?= Yii::$app->user->identity->point ?></span><a href="<?= Yii::$app->urlManager->createUrl(['user/profile']) ?>" style="padding-left: 30px;"><i class="glyphicon glyphicon-user"></i>完善个人信息</a></p>
+    <p>
+        <strong>
+            <?= Yii::$app->user->identity->username ?>
+        </strong>, 欢迎来到易买网上商城
+    </p>
+    <p>
+        <span>
+            <i class="glyphicon glyphicon-usd"></i>
+            我的积分：<?= Yii::$app->user->identity->point ?>
+        </span>
+        <a href="<?= Yii::$app->urlManager->createUrl(['user/profile']) ?>" style="padding-left: 30px;">
+            <i class="glyphicon glyphicon-user"></i>
+            完善个人信息
+        </a>
+    </p>
 </div>
 <div class="trade_mod i_marb">
     <div class="my_point">
@@ -30,33 +46,56 @@ $i = 0;
                 <?php foreach ($orders as $item) { ?>
                     <tbody>
                     <tr>
-                        <th><p class="mt5 pl12"><span class="gray888">订单编号：<a href="<?= Yii::$app->urlManager->createUrl(['order/view', 'id' => $item->id]) ?>" target="_blank"><?= $item->sn ?></a></span> &nbsp; &nbsp; 下单时间：<?= Yii::$app->formatter->asDatetime($item->created_at) ?></p></th>
-                        <th width="120"> <em class="em02 tstatus_17"> <?= \common\models\Order::getStatusLabels($item->status) ?> </em> </th>
-                        <th width="220" class="trade-count"><em>订单金额：￥</em> <em class="em_price"> <?= $item->amount ?> </em> </th>
+                        <th>
+                            <p class="mt5 pl12">
+                                <span class="gray888">订单编号：
+                                    <a href="<?= Yii::$app->urlManager->createUrl(['order/view', 'id' => $item->id]) ?>" target="_blank"><?= $item->sn ?>
+                                    </a>
+                                </span> &nbsp; &nbsp; 下单时间：<?= Yii::$app->formatter->asDatetime($item->created_at) ?>
+                            </p>
+                        </th>
+                        <th width="120">
+                            <em class="em02 tstatus_17">
+                                <?= Order::getStatusLabels($item->status) ?>
+                            </em>
+                        </th>
+                        <th width="220" class="trade-count">
+                            <em>订单金额：￥</em>
+                            <em class="em_price"> <?= $item->amount ?> </em>
+                        </th>
                     </tr>
                     <tr>
                         <td class="items">
-                            <?php foreach ($item->orderProducts as $product) { ?>
+                            <?php foreach ($item->orderProducts as $product) : ?>
                                 <dl class="cle_float">
                                     <dd class="trade_img"><img src="<?= $product->thumb ?>"></dd>
                                     <dt class="trade_title"><a target="_blank" href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => $product->product_id]) ?>"><?= $product->name ?> </a></dt>
                                     <dd class="trade_price">￥<?= $product->price ?> x <?= $product->number ?></dd>
                                     <dd class="trade_rebuy"><a rel="nofollow" href="javascript:void(0);" class="J_addCart">再次购买</a></dd>
                                 </dl>
-                            <?php } ?>
+                            <?php endforeach; ?>
                         </td>
                         <td class="status"></td>
                         <td class="operate">
                             <div>
                                 <a href="<?= Yii::$app->urlManager->createUrl(['order/view', 'id' => $item->id]) ?>" class="graybtn" target="_blank">查看详情</a>
-                                <?php if ($item->payment_method == \common\models\Order::PAYMENT_METHOD_PAY && $item->payment_status == \common\models\Order::PAYMENT_STATUS_UNPAID) { ?><a class="btn" href="<?= Yii::$app->urlManager->createUrl(['cart/pay', 'id' => $item->sn]) ?>" target="_blank">去付款</a><?php } ?>
+                                <?php if ($item->payment_method == Order::PAYMENT_METHOD_PAY && $item->payment_status == Order::PAYMENT_STATUS_UNPAID) : ?>
+                                    <a class="btn" href="<?= Yii::$app->urlManager->createUrl(['cart/pay', 'id' => $item->sn]) ?>" target="_blank">去付款</a>
+                                <?php endif; ?>
                             </div>
                             <div>
                                 <input type="hidden" name="order_id" value="<?= $item->id ?>">
-                                <?php if ($item->status == \common\models\Order::PAYMENT_STATUS_UNPAID) { ?>
-                                    <a href="javascript:;" class="graybtn order-cancel" data-link="<?= Yii::$app->urlManager->createUrl(['order/ajax-status', 'id' => $item->id, 'status' => \common\models\Order::STATUS_CANCEL]) ?>">取消订单</a><div class="cancel-tip" style="display: block;"><i>♦</i><i class="btm">♦</i><p><em class="red">下单后24小时内没有支付</em>系统将自动取消</p></div>
-                                <?php } elseif ($item->status != \common\models\Order::STATUS_DELETED) { ?>
-                                    <a class="graybtn order-delete" data-link="<?= Yii::$app->urlManager->createUrl(['order/ajax-status', 'id' => $item->id, 'status' => \common\models\Order::STATUS_DELETED]) ?>" href="javascript:;">删除订单</a>
+                                <?php if ($item->status == Order::PAYMENT_STATUS_UNPAID) { ?>
+                                    <a href="javascript:;" class="graybtn order-cancel" data-link="<?= Yii::$app->urlManager->createUrl(['order/ajax-status', 'id' => $item->id, 'status' => Order::STATUS_CANCEL]) ?>">取消订单</a>
+                                    <div class="cancel-tip" style="display: block;">
+                                        <i>♦</i>
+                                        <i class="btm">♦</i>
+                                        <p>
+                                            <em class="red">下单后24小时内没有支付</em>系统将自动取消
+                                        </p>
+                                    </div>
+                                <?php } elseif ($item->status != Order::STATUS_DELETED) { ?>
+                                    <a class="graybtn order-delete" data-link="<?= Yii::$app->urlManager->createUrl(['order/ajax-status', 'id' => $item->id, 'status' => Order::STATUS_DELETED]) ?>" href="javascript:;">删除订单</a>
                                 <?php } ?>
                             </div>
                         </td>
@@ -122,26 +161,5 @@ $i = 0;
     </div>
 </div>
 
-<?php
-$js = <<<JS
-jQuery(".order-cancel").click(function(){
-    var link = $(this).data('link');
-    $.get(link, function(data, status) {
-        if (status == "success") {
-            location.reload()
-        }
-    });
-});
-jQuery(".order-delete").click(function(){
-    var link = $(this).data('link');
-    $.get(link, function(data, status) {
-        if (status == "success") {
-            alert('成功删除订单');
-            location.reload()
-        }
-    });
-});
-JS;
 
-$this->registerJs($js);
 

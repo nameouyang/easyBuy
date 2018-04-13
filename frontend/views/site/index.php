@@ -73,9 +73,21 @@ $this->registerJsFile('@web/js/switchable.js', ['depends' => \frontend\assets\Ap
                 <h2>手机</h2>
             </div>
             <ul class="brand">
-                <li> <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 3]) ?>" target="_blank" title="iphone"> <img src="/upload/201502/small-iphone61.jpg"></a> </li>
-                <li> <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 1]) ?>" target="_blank" title="macbook"> <img src="/upload/201502/small-macbook.jpg"></a> </li>
-                <li> <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 5]) ?>" target="_blank" title="sumsung"> <img src="/upload/201502/small-sumsung.jpg"></a> </li>
+                <li>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 3]) ?>" target="_blank" title="iphone">
+                        <img src="/upload/201502/small-iphone61.jpg">
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 1]) ?>" target="_blank" title="macbook">
+                        <img src="/upload/201502/small-macbook.jpg">
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 5]) ?>" target="_blank" title="sumsung">
+                        <img src="/upload/201502/small-sumsung.jpg">
+                    </a>
+                </li>
             </ul>
             <div class="brand_cata">
                 <a target="_blank" href="<?= Yii::$app->urlManager->createUrl(['product/search', 'keyword' => 'iPhone']) ?>">苹果</a>
@@ -84,12 +96,16 @@ $this->registerJsFile('@web/js/switchable.js', ['depends' => \frontend\assets\Ap
                 <a target="_blank" href="<?= Yii::$app->urlManager->createUrl(['product/search', 'keyword' => '小米']) ?>">小米</a>
             </div>
         </div>
-        <div class="series_pic"> <a <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 2]) ?>" target="_blank"> <img src="/upload/201502/small-iphone4s.jpg"></a> </div>
+        <div class="series_pic">
+            <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => 2]) ?>" target="_blank">
+                <img src="/upload/201502/small-iphone4s.jpg">
+            </a>
+        </div>
         <div class="pro_list">
             <ul class="cle">
                 <?php foreach ($products as $item) { ?>
                     <li>
-                        <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => $item->id]) ?>" target="_blank">
+                        <a href="<?= Yii::$app->urlManager->createUrl(['product/view', 'id' => $item->id]) ?>" target="_blank" title="<?= $item->name ?>">
                             <p class="pic"> <img src="<?= $item->thumb ?>"></p>
                             <h3><?= $item->name ?></h3>
                             <p class="price">￥<?= $item->price ?></p>

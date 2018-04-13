@@ -84,4 +84,16 @@ class PasswordResetRequestForm extends Model
 
         return false;
     }
+
+    public static function sendEmailCode($email, $code)
+    {
+
+        return Yii::$app->mailer->compose()
+            ->setFrom(['804572454@qq.com'=>'easyBuy 验证码']) //和上面的from字段相对应  可以只写一个
+//                    ->setTo('804572454@qq.com')
+            ->setTo($email)
+            ->setSubject('easyBuy 验证码')
+            ->setTextBody('您的验证码为：' . $code)  //如果不在compose中加内容的话， 就要设置改选项
+            ->send();
+    }
 }
