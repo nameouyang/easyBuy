@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\CouponSearch */
@@ -11,67 +14,164 @@ use yii\helpers\ArrayHelper;
 $this->title = Yii::t('app', 'Coupons');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="coupon-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="pay-type-index padding">
+    <?=     Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ])
+    ?>
+    <div class="box">
+        <div class="box-header">
+            <h2><?= Html::encode($this->title) ?></h2>
+            <small><?= Html::encode($this->title) ?></small>
+        </div>
+        <div class="row p-a">
 
-    <!--p>
-        <?= Html::a(Yii::t('app', 'Create ') . Yii::t('app', 'Coupon'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p-->
+            <div style="float:left;" class="m-l-md">
+                <?php // echo Html::a(Yii::t('app', 'Create ') . Yii::t('app', 'Coupon Type'), ['create'], [
+                    //'class' => 'btn btn-success',
+                    //'data-toggle' => 'modal',
+                    //'data-target' => '#m-a-a-a',
+                    //'ui-toggle-class' => 'roll',
+                    //'ui-target' => '#animate',
+                    //data-url' => Url::to(['create'])
+                //]) ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            </div>
 
-            'id',
-            [
-                'attribute' => 'user_id',
-                'value'=>function ($model) {
-                    return $model->user ? $model->user->username : '-';
-                },
-            ],
-            [
-                'attribute' => 'coupon_type_id',
-                'format' => 'html',
-                'value' => function ($model) {
-                    return $model->couponType ? $model->couponType->name : '-';
-                },
-                'filter' => Html::activeDropDownList(
-                    $searchModel,
-                    'coupon_type_id',
-                    ArrayHelper::map(\common\models\CouponType::find()->all(), 'id', 'name'),
-                    ['class' => 'form-control', 'prompt' => Yii::t('app', 'Please Filter')]
-                )
-            ],
-            'money',
-            'min_amount',
-            'started_at:date',
-            'ended_at:date',
-            'sn',
-            [
-                'attribute' => 'order_id',
-                'value' => function ($model) {
-                    return $model->order_id ? $model->order_id : '-';
-                },
-            ],
-            [
-                'attribute' => 'used_at',
-                'value' => function ($model) {
-                    return $model->used_at ? Yii::$app->formatter->asDatetime($model->used_at) : '-';
-                },
-            ],
-            'created_at:date',
-            // 'updated_at',
-            // 'created_by',
-            // 'updated_by',
+            <div class="text-right" style="padding-right:5px">
+                <div id="DataTables_Table_2_filter" class="dataTables_filter">
+                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                </div>
+            </div>
+        </div>
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view}',
-            ],
-        ],
-    ]); ?>
+        <div class="table-responsive">
+            <?php Pjax::begin([
+                'id' => 'gridview-pjax',
+            ]); ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'tableOptions' => [
+                    'class' => 'table table-bordered table-striped table-hover m-a-0 water-mark',
+                    'style' => 'min-width:53rem',
+                ],
+                'pager' => [
+                    'options' => ['class' => 'pagination pagination-sm m-a-0'],
+                    'firstPageLabel' => Yii::t('app', 'First Page'),
+                    'lastPageLabel' => Yii::t('app', 'Last Page'),
+                    'prevPageLabel' => Yii::t('app', 'Previous'),
+                    'nextPageLabel' => Yii::t('app', 'Next'),
+                    'registerLinkTags' => 1,
+                ],
+                'layout' => '<div class="box-divider m-a-0"></div><div>{items}</div><div class="dker p-a"><div class="row"><div class="col-md-5"><small class="text-muted inline m-t-sm m-b-sm">{summary}</small></div><div class="col-md-7 text-right text-center-xs">{pager}</div></div>',
+                'columns' =>[
+                    [
+                        'class' => 'yii\grid\SerialColumn',
+                        'header'=>'序号',
+                        'contentOptions' => ['class' => 'text-center'],
+                    ],
 
+                    'id',
+                    [
+                        'attribute' => 'user_id',
+                    ],
+                    [
+                        'attribute' => 'user_id',
+                        'header' => Yii::t('app', 'User Name'),
+                        'value'=>function ($model) {
+                            return $model->user ? $model->user->username : '-';
+                        },
+                    ],
+                    [
+                        'attribute' => 'coupon_type_id',
+                        'format' => 'html',
+                        'value' => function ($model) {
+                            return $model->couponType ? $model->couponType->name : '-';
+                        },
+                    ],
+                    'money',
+                    'min_amount',
+                    'started_at:date',
+                    'ended_at:date',
+                    'sn',
+                    [
+                        'attribute' => 'order_id',
+                        'value' => function ($model) {
+                            return $model->order_id ? $model->order_id : '-';
+                        },
+                    ],
+                    [
+                        'attribute' => 'used_at',
+                        'value' => function ($model) {
+                            return $model->used_at ? Yii::$app->formatter->asDatetime($model->used_at) : '-';
+                        },
+                    ],
+                    [
+                        'attribute' => 'created_at',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'col-th-13'],
+                        'content'   => function ($model) {
+                            return date('Y:m:d H:i:s', $model->created_at);
+                        }
+                    ],
+
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'header'=> '操作',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'col-th-11'],
+                        'template' => ' {view}',
+                        'buttons' => [
+                            'delete' => function ($url, $model) {
+                                return (Html::a('<span class="glyphicon glyphicon-trash m-l-sm "></span>', $url, ['class' => 'ajaxDelete', 'title' => Yii::t('app', 'Delete')]) );
+                            },
+                            'update' => function ($url, $model) {
+                                return (
+                                Html::a('<span class="glyphicon glyphicon-pencil m-r-sm"></span>',
+                                    $url, [
+                                        'ui-target' => '#animate',
+                                        'title' => Yii::t('app', 'Update'),
+                                        'data-url' => $url
+                                    ])
+                                );
+                            },
+                        ],
+                        /*'urlCreator' => function ($action, $model, $key, $index) {
+                            if ($action === 'view') {
+                                return ['view', 'id' => $model->id];
+                            } else if ($action === 'update') {
+                                return ['update', 'id' => $model->id];
+                            } else if ($action === 'delete') {
+                                return ['delete', 'id' => $model->id];
+                            } else if ($action === 'car-type') {
+                                return ['send', 'id' => $model->id];
+                            }
+                        }*/
+                    ],
+
+                    [
+                        'content' => function ($model, $key, $index, $column) {
+                            return '&nbsp;';
+                        }
+                    ],
+                ],
+
+            ]); ?>
+            <?php Pjax::end(); ?>
+        </div>
+    </div>
+</div>
+
+<div id="m-a-a-a" class="modal bs-example-modal-lg fade " data-backdrop="static" style="" keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="text-center" style="height:500px">
+                <img src="/images/loading.gif" style="margin-top: 200px">
+            </div>
+        </div>
+    </div>
 </div>

@@ -25,14 +25,14 @@ td img{width:100px;}
 </style>
 
 
-    <div class="modal-header m-b-md">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ])
-        ?>
-        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
-        <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
-    </div>
+<div class="modal-header m-b-md">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ])
+    ?>
+    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+    <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
+</div>
 
 <div class="product-view">
 

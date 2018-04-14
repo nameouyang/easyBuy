@@ -57,7 +57,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_by') ?>
 
-        <div class="input-group" style="padding-bottom: 10px;">
+    <div class="input-group" style="padding-bottom: 10px;">
         <?= $form->field($model, 'created_at')->textInput(
             [
                 'class'       => 'form-control search-input-item',

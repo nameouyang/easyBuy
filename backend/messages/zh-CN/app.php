@@ -270,6 +270,24 @@ return [
     'Search for stock' =>' 按库存数量搜索',
     'Search for type' =>' 按类型搜索',
     'Search for brand' =>' 按品牌搜索',
+    'Search for username' =>' 按用户名搜索',
+    'Search for email' =>' 按用Email搜索',
+    'Search for role' =>' 按用角色搜索',
+    'Search for address name' =>' 按地址名称搜索',
+    'Search for consignee' =>' 按联系人搜索',
+    'Search for address' =>' 按详细地址搜索',
+    'Search for default address' =>' 按是否是默认地址搜索',
+    'Search for point' =>' 按积分搜索',
+    'Search for balance' =>' 按余额搜索',
+    'Search for coupon min_amount' =>' 按最低消费金额搜索',
+    'Search for coupon money' =>' 按优惠券金额搜索',
+    'Search for coupon type' =>' 按优惠券类型搜索',
+    'Search for coupon name' =>' 按优惠券名称搜索',
+    'Search for star' =>' 按评分搜索',
+
+
+
+    'Is Default Address' => '是否是默认地址',
 
     'View'  => '查看',
 

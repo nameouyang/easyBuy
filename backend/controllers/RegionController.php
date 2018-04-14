@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\components\NoCsrf;
 use Yii;
 use common\models\Region;
 use common\models\RegionSearch;
@@ -16,6 +17,8 @@ use yii\filters\AccessControl;
  */
 class RegionController extends Controller
 {
+    //public $enableCsrfValidation = false;
+
     public function behaviors()
     {
         return [
@@ -33,6 +36,14 @@ class RegionController extends Controller
                         'roles' => ['@']
                     ]
                 ]
+            ],
+            'csrf'  => [
+                'class'      => NoCsrf::className(),
+                'controller' => $this,
+                'actions'    => [
+                    'ajax-list-child',
+                    'org-area-info',
+                ],
             ],
         ];
     }

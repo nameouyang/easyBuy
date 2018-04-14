@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Status;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -13,17 +14,43 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => ['class' => 'form-inline'],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'username')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for username'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'user_id') ?>
+    <?= $form->field($model, 'status')->dropDownList(
+        Status::labels(),
+        [
+            'class'       => 'form-control search-input-item',
+            'prompt' => Yii::t('app', 'Search for status'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'username') ?>
+    <?= $form->field($model, 'star')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for star'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'product_id') ?>
+    <?= $form->field($model, 'point')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for point'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'order_id') ?>
+    <?php // echo $form->field($model, 'product_id') ?>
 
     <?php // echo $form->field($model, 'star') ?>
 
@@ -43,9 +70,19 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_by') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+    <div class="input-group" style="padding-bottom: 10px;">
+        <?= $form->field($model, 'order_id')->textInput(
+            [
+                'class'       => 'form-control search-input-item',
+                'placeholder' => Yii::t('app', 'Search for order id'),
+                'type' => 'search'
+            ]
+        )->label(false) ?>
+        <span class="input-group-btn">
+            <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn white']) ?>
+            <?php //Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?php //Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        </span>
     </div>
 
     <?php ActiveForm::end(); ?>

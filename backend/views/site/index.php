@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 use \backend\assets\AppAsset;
+use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
 $this->registerJsFile('@web/js/page/site/index.js', ['depends' => AppAsset::className()]);
@@ -33,6 +35,16 @@ $this->title = '欢迎进入 easy buy 后台管理';
     }
 
 </style>
+
+<div class="modal-header m-b-md">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ])
+    ?>
+    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+    <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
+</div>
+
 <div class="site-index" style="margin:0 50px 0 50px">
     <h4><?= Yii::t('app', 'Order Stat') ?></h4>
     <table class="table table-striped table-bordered table-hover">

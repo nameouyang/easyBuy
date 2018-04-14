@@ -42,22 +42,19 @@ use yii\widgets\ActiveForm;
         </div>
     </div>-->
 
-    <?= $form->field($model, 'order_id')->textInput(['style'=>'disable:disabled;']) ?>
+    <?= $form->field($model, 'order_id')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput([
-            'value'=>\common\models\Order::getStatusLabels($model->status),
-            ]
-    ) ?>
+    <?= $form->field($model, 'status')->textInput() ?>
 
     <?= $form->field($model, 'remark')->textInput(['maxlength' => 255]) ?>
 
-    <?php // $form->field($model, 'created_at')->textInput() ?>
+    <?php // echo$form->field($model, 'created_at')->textInput() ?>
 
-    <?php //$form->field($model, 'updated_at')->textInput() ?>
+    <?php // echo $form->field($model, 'updated_at')->textInput() ?>
 
-    <?php // $form->field($model, 'created_by')->textInput() ?>
+    <?php // echo $form->field($model, 'created_by')->textInput() ?>
 
-    <?php // $form->field($model, 'updated_by')->textInput() ?>
+    <?php // echo $form->field($model, 'updated_by')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

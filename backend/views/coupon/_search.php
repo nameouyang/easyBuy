@@ -1,5 +1,7 @@
 <?php
 
+use common\components\ArrayHelper;
+use common\models\CouponType;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -13,17 +15,51 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => ['class' => 'form-inline'],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'id')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for id'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'user_id') ?>
+    <?= $form->field($model, 'user_id')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for user id'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'coupon_type_id') ?>
+    <?= $form->field($model, 'coupon_type_id')->dropDownList(
+        ArrayHelper::map(CouponType::find()->all(), 'id', 'name'),
+        [
+            'class'       => 'form-control search-input-item',
+            'prompt' => Yii::t('app', 'Search for coupon type id'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'sn') ?>
+    <?= $form->field($model, 'sn')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for sn'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'order_id') ?>
+    <?= $form->field($model, 'order_id')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for order id'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
+
+
 
     <?php // echo $form->field($model, 'used_at') ?>
 
@@ -35,9 +71,19 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_by') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+    <div class="input-group" style="padding-bottom: 10px;">
+        <?= $form->field($model, 'min_amount')->textInput(
+            [
+                'class'       => 'form-control search-input-item',
+                'placeholder' => Yii::t('app', 'Search for coupon min_amount'),
+                'type' => 'search'
+            ]
+        )->label(false) ?>
+        <span class="input-group-btn">
+            <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn white']) ?>
+            <?php //Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?php //Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        </span>
     </div>
 
     <?php ActiveForm::end(); ?>
