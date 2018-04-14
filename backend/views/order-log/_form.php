@@ -12,19 +12,52 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'order_id')->textInput() ?>
+    <!--<div class="form-group row" style="width: 100%; background-color: #eee; padding-top: 10px;">
+        <div class="col-md-3" >
+            <h5>基本信息</h5>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-2 form-control-label text-right"><?/*= Yii::t('app', 'Promotion schedule') */?></label>
+        <div class="col-md-3">
+            <?php /*echo Html::textInput(
+                'full-price',
+                '',
+                [
+                    'required' => true,
+                    'class' => 'form-control full-price-input',
+                    'placeholder' => '请输入金额',
+                    'type' => 'number',
+                ]
+            ) */?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <div class="form-group row">
+        <label class="col-md-2 form-control-label text-right">订单号</label>
+        <div class="col-md-3">
+            <?php /*echo $form->field($model, 'order_id')->textInput([
+                    'value' => 'asda',
+            ])->label(false) */?>
+        </div>
+    </div>-->
+
+    <?= $form->field($model, 'order_id')->textInput(['style'=>'disable:disabled;']) ?>
+
+    <?= $form->field($model, 'status')->textInput([
+            'value'=>\common\models\Order::getStatusLabels($model->status),
+            ]
+    ) ?>
 
     <?= $form->field($model, 'remark')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?php // $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?php //$form->field($model, 'updated_at')->textInput() ?>
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
+    <?php // $form->field($model, 'created_by')->textInput() ?>
 
-    <?= $form->field($model, 'updated_by')->textInput() ?>
+    <?php // $form->field($model, 'updated_by')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

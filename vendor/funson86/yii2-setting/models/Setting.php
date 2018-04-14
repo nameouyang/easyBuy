@@ -1,8 +1,6 @@
 <?php
-
 namespace funson86\setting\models;
 
-use Yii;
 use funson86\setting\Module;
 
 /**
@@ -47,14 +45,14 @@ class Setting extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('setting', 'ID'),
-            'parent_id' => Module::t('setting', 'Parent ID'),
-            'code' => Module::t('setting', 'Code'),
-            'type' => Module::t('setting', 'Type'),
+            'id'          => Module::t('setting', 'ID'),
+            'parent_id'   => Module::t('setting', 'Parent ID'),
+            'code'        => Module::t('setting', 'Code'),
+            'type'        => Module::t('setting', 'Type'),
             'store_range' => Module::t('setting', 'Store Range'),
-            'store_dir' => Module::t('setting', 'Store Dir'),
-            'value' => Module::t('setting', 'Value'),
-            'sort_order' => Module::t('setting', 'Sort Order'),
+            'store_dir'   => Module::t('setting', 'Store Dir'),
+            'value'       => Module::t('setting', 'Value'),
+            'sort_order'  => Module::t('setting', 'Sort Order'),
         ];
     }
 }

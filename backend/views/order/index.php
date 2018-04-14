@@ -59,23 +59,37 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     [
                         'attribute' => 'user_id',
+                        'headerOptions' => ['class'=>'col-th-7'],
+                    ],
+                    [
+                        'attribute' => 'user_id',
+                        'header'    => Yii::t('app', 'User Name'),
+                        'headerOptions' => ['class'=>'col-th-7'],
                         'value'=>function ($model) {
                             return $model->user ? $model->user->username : '-';
                         },
                     ],
-                    'sn',
-                    'consignee',
+                    [
+                        'attribute' => 'sn',
+                        'label'     => '订单号'
+                    ],
+                    [
+                        'attribute' => 'consignee',
+                        'headerOptions'  => ['class' => 'col-th-7'],
+                    ],
+
                     [
                         'attribute'      => 'address',
-                        'headerOptions'  => ['class' => 'col-th-9'],
+                        'headerOptions'  => ['class' => 'col-th-15'],
                         'contentOptions' => function ($model) {
                             $name = (isset($model->country0) ? $model->country0->name : '-') .
                                 (isset($model->province0) ? $model->province0->name : '-') .
                                 (isset($model->city0) ? $model->city0->name : '-') .
                                 (isset($model->district0) ? $model->district0->name : '-');
-                            return ['class'   => 'name-9 text-left',
+                            return ['class'   => 'name-15 text-left',
                                 'data-toggle' => 'tooltip',
-                                'title'       => Html::encode($name)
+                                'title'       => Html::encode($name),
+                                'style'       => 'max-width: 15rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'
                             ];
                         },
                         'content' => function ($model) {
@@ -137,19 +151,32 @@ $this->params['breadcrumbs'][] = $this->title;
                             return '<span class="label ' . $class . '">' . Order::getStatusLabels($model->status) . '</span>';
                         },
                     ],
-                    'created_at:date',
+                    [
+                        'attribute' => 'created_at',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'col-th-13'],
+                        'content'   => function ($model) {
+                            return date('Y:m:d H:i:s', $model->created_at);
+                        }
+                    ],
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'col-th-9'],
-                        'template' => ' {update} {delete} {view}',
+                        'template' => ' {update} {view} {delete}',
                         'buttons' => [
                             'delete' => function ($url, $model) {
-                                return (Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['class' => 'ajaxDelete', 'title' => Yii::t('app', 'Delete')]) );
+                                return (Html::a('<span class="glyphicon glyphicon-trash m-l-sm"></span>',
+                                    $url, [
+                                        //'class' => 'ajaxDelete',
+                                        'title' => Yii::t('app', 'Delete'),
+                                        'data-url' => $url
+                                    ])
+                                );
                             },
                             'update' => function ($url, $model) {
                                 return (
-                                Html::a('<span class="glyphicon glyphicon-pencil"></span>',
+                                Html::a('<span class="glyphicon glyphicon-pencil m-r-sm"></span>',
                                     $url, [
                                         'ui-target' => '#animate',
                                         'title' => Yii::t('app', 'Update'),

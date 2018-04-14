@@ -47,6 +47,7 @@ return [
     'Cms Catalog'                           => 'CMS分类',
     'Cms Show'                              => 'CMS列表页',
     'User'                                  => '用户',
+    'User Name'                             => '用户名',
     'Users'                                 => '用户',
     'Role'                                  => '角色',
     'Roles'                                 => '角色',
@@ -70,7 +71,6 @@ return [
     'New password was saved.' => '修改为新密码成功',
     'Remember Me'             => '自动登录',
     'Email'                   => '电子邮箱',
-    'Auth Role'               => '角色',
     'Status'                  => '状态',
     'Created At'              => '创建时间',
     'Updated At'              => '更新时间',
@@ -78,7 +78,6 @@ return [
     'Created By'              => '创建用户',
     'Update User Id'          => '更新用户',
     'Updated By'              => '更新用户',
-    'Sort Order'              => '排序',
     'Root'                    => '顶级',
 
     'Directly Input Time' => '可直接输入日期，格式：2015-01-01',
@@ -120,16 +119,12 @@ return [
     'Banner'       => 'Banner图片',
     'Is Nav'       => '导航是否显示',
     'Redirect Url' => '外部链接',
-    'Sort Order'   => '排序',
     'Page Size'    => '每页显示数量',
-    'Actions'      => '操作',
-    'Category ID'  => '分类',
 
     'PAYMENT_METHOD_PAY' => '在线支付',
     'PAYMENT_METHOD_COD' => '货到付款',
 
     'STATUS_CANCEL'             => '已取消',
-    'STATUS_DELETED'            => '删除',
     'PAYMENT_STATUS_COD'        => '货到付款',
     'PAYMENT_STATUS_UNPAID'     => '未付款',
     'PAYMENT_STATUS_PAYING'     => '正在付款',
@@ -175,7 +170,6 @@ return [
     'Brands'   => '品牌',
     'Brand ID' => '品牌',
 
-    'Comment'    => '评价',
     'Comments'   => '评价',
     'Product ID' => '商品',
     'Order ID'   => '订单',
@@ -193,7 +187,7 @@ return [
 
     'Search Log'  => '搜索记录',
     'Search Logs' => '搜索记录',
-    'User ID'     => '用户',
+    'User ID'     => '用户ID',
     'Keyword'     => '关键字',
 
 
@@ -237,7 +231,6 @@ return [
 
     'Point Log'  => '积分',
     'Point Logs' => '积分',
-    'Type'       => '类型',
     'Balance'    => '余额',
 
 
@@ -261,5 +254,23 @@ return [
 
     'Shipment'   => '配送',
     'Order Info' => '订单详情',
+
+    'Search for order id' => '根据订单号搜索',
+    'Search for status'   => '按状态搜索',
+    'Search for created_at'   => '按创建人搜索',
+    'Search for user id'=> '按用户ID搜索',
+    'Search for goods name'=> '按商品名称搜索',
+    'Search for sku'=> '按商品SKU搜索',
+    'Search for sn' =>' 按SN搜索',
+    'Search for tel' =>' 按手机号搜索',
+    'Search for payment status' =>' 按支付状态搜索',
+    'Search for shipment status' =>' 按配送状态搜索',
+    'Search for order status' =>' 按订单状态搜索',
+    'Search for category' =>' 按分类搜索',
+    'Search for stock' =>' 按库存数量搜索',
+    'Search for type' =>' 按类型搜索',
+    'Search for brand' =>' 按品牌搜索',
+
+    'View'  => '查看',
 
 ];

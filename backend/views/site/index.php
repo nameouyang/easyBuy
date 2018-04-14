@@ -5,7 +5,7 @@ use \backend\assets\AppAsset;
 AppAsset::register($this);
 $this->registerJsFile('@web/js/page/site/index.js', ['depends' => AppAsset::className()]);
 
-$this->title = '<h2>欢迎进入 easy buy 后台管理</h2>';
+$this->title = '欢迎进入 easy buy 后台管理';
 ?>
 
 <style>
@@ -33,7 +33,7 @@ $this->title = '<h2>欢迎进入 easy buy 后台管理</h2>';
     }
 
 </style>
-<div class="site-index" style="margin:50px 50px 0 50px">
+<div class="site-index" style="margin:0 50px 0 50px">
     <h4><?= Yii::t('app', 'Order Stat') ?></h4>
     <table class="table table-striped table-bordered table-hover">
         <thead>

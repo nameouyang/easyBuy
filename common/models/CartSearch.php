@@ -1,11 +1,8 @@
 <?php
-
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Cart;
 
 /**
  * CartSearch represents the model behind the search form about `common\models\Cart`.
@@ -43,7 +40,7 @@ class CartSearch extends Cart
     public function search($params)
     {
         $query = Cart::find();
-        
+
         $query->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
@@ -55,15 +52,15 @@ class CartSearch extends Cart
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'product_id' => $this->product_id,
-            'number' => $this->number,
+            'id'           => $this->id,
+            'user_id'      => $this->user_id,
+            'product_id'   => $this->product_id,
+            'number'       => $this->number,
             'market_price' => $this->market_price,
-            'price' => $this->price,
-            'type' => $this->type,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'price'        => $this->price,
+            'type'         => $this->type,
+            'created_at'   => $this->created_at,
+            'updated_at'   => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'session_id', $this->session_id])

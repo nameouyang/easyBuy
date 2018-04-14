@@ -1,11 +1,9 @@
 <?php
-
 namespace common\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "cart".
@@ -24,7 +22,6 @@ use yii\db\Expression;
  */
 class Cart extends \yii\db\ActiveRecord
 {
-
     /**
      * @inheritdoc
      */
@@ -73,25 +70,25 @@ class Cart extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'session_id' => Yii::t('app', 'Session ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
-            'sku' => Yii::t('app', 'Sku'),
-            'name' => Yii::t('app', 'Name'),
-            'number' => Yii::t('app', 'Number'),
+            'id'           => Yii::t('app', 'ID'),
+            'user_id'      => Yii::t('app', 'User ID'),
+            'session_id'   => Yii::t('app', 'Session ID'),
+            'product_id'   => Yii::t('app', 'Product ID'),
+            'sku'          => Yii::t('app', 'Sku'),
+            'name'         => Yii::t('app', 'Name'),
+            'number'       => Yii::t('app', 'Number'),
             'market_price' => Yii::t('app', 'Market Price'),
-            'price' => Yii::t('app', 'Price'),
-            'thumb' => Yii::t('app', 'Thumb'),
-            'type' => Yii::t('app', 'Type'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'price'        => Yii::t('app', 'Price'),
+            'thumb'        => Yii::t('app', 'Thumb'),
+            'type'         => Yii::t('app', 'Type'),
+            'created_at'   => Yii::t('app', 'Created At'),
+            'updated_at'   => Yii::t('app', 'Updated At'),
         ];
     }
 
     /**
      * Before save.
-     * 
+     *
      */
     /*public function beforeSave($insert)
     {
@@ -113,5 +110,4 @@ class Cart extends \yii\db\ActiveRecord
         parent::afterSave($insert, $changedAttributes);
         // add your code here
     }*/
-
 }

@@ -13,17 +13,35 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => ['class' => 'form-inline'],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'user_id')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for user id'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'user_id') ?>
+    <?= $form->field($model, 'sku')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for sku'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'session_id') ?>
+    <?php /*= $form->field($model, 'name')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for user id'),
+            'type' => 'search'
+        ]
+    )->label(false) */?>
 
-    <?= $form->field($model, 'product_id') ?>
 
-    <?= $form->field($model, 'sku') ?>
+    <?php // $form->field($model, 'sku') ?>
 
     <?php // echo $form->field($model, 'name') ?>
 
@@ -41,10 +59,25 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+    <div class="input-group" style="padding-bottom: 10px;">
+        <?= $form->field($model, 'name')->textInput(
+            [
+                'class'       => 'form-control search-input-item',
+                'placeholder' => Yii::t('app', 'Search for goods name'),
+                'type'        => 'search'
+            ]
+        )->label(false) ?>
+        <span class="input-group-btn">
+            <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn white']) ?>
+            <?php //Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?php //Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        </span>
     </div>
+
+    <!--<div class="input-group">
+        <?php/* Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) */?>
+        <?php /* Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) */?>
+    </div>-->
 
     <?php ActiveForm::end(); ?>
 

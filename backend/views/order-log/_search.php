@@ -8,22 +8,48 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="order-log-search">
+
+<div class="order-log-search text-right">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
+        'options' => ['class' => 'form-inline'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?php /*$form->field($model, 'id')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for Id'),
+            'type' => 'search'
+        ]
+    )->label(false) */?>
 
-    <?= $form->field($model, 'order_id') ?>
+    <?= $form->field($model, 'order_id')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for order id'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'status') ?>
+    <?= $form->field($model, 'status')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for status'),
+            'type' => 'search'
+        ]
+    )->label(false) ?>
 
-    <?= $form->field($model, 'remark') ?>
+    <?php /*= $form->field($model, 'remark')->textInput(
+        [
+            'class'       => 'form-control search-input-item',
+            'placeholder' => Yii::t('app', 'Search for sn'),
+            'type' => 'search'
+        ]
+    )->label(false) */?>
 
-    <?= $form->field($model, 'created_at') ?>
+    <?php // $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
@@ -31,9 +57,19 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_by') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <div class="input-group" style="padding-bottom: 10px;">
+        <?= $form->field($model, 'created_at')->textInput(
+            [
+                'class'       => 'form-control search-input-item',
+                'placeholder' => Yii::t('app', 'Search for created_at'),
+                'type'        => 'search'
+            ]
+        )->label(false) ?>
+        <span class="input-group-btn">
+            <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn white']) ?>
+            <?php //Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+            <?php //Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        </span>
     </div>
 
     <?php ActiveForm::end(); ?>

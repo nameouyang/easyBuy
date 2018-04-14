@@ -1,15 +1,26 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\DetailView;
-
+use common\models\Order;
 /* @var $this yii\web\View */
 /* @var $model common\models\OrderLog */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Order Logs'), 'url' => ['index']];
+$this->title = Yii::t('app', 'View') . Yii::t('app', 'Order Log') .$model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Order Log'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<div class="modal-header m-b-md">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ])
+    ?>
+    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+    <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
+</div>
+
 <div class="order-log-view">
 
     <p>
@@ -30,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'order_id',
             [
                 'attribute' => 'status',
-                'value' => \common\models\Order::getStatusLabels($model->status),
+                'value' => Order::getStatusLabels($model->status),
             ],
             'remark',
             'created_at:datetime',

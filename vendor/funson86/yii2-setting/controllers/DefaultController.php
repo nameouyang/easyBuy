@@ -1,12 +1,11 @@
 <?php
-
 namespace funson86\setting\controllers;
 
 use funson86\setting\models\Setting;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
 
 class DefaultController extends Controller
 {
@@ -14,7 +13,7 @@ class DefaultController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -35,21 +34,23 @@ class DefaultController extends Controller
     {
         //if(!Yii::$app->user->can('readPost')) throw new HttpException(403, 'No Auth');
 
-        if(Yii::$app->request->isPost)
-        {
+        if (Yii::$app->request->isPost) {
             $setting = Yii::$app->request->post('Setting');
-            foreach($setting as $key => $value) {
+            foreach ($setting as $key => $value) {
                 Setting::updateAll(['value' => $value], ['code' => $key]);
             }
             Yii::$app->session->setFlash('alert', [
-                'body'=>\Yii::t('backend', 'Settings has been successfully saved'),
-                'options'=>['class'=>'alert-success']
+                'body'   => \Yii::t('backend', 'Settings has been successfully saved'),
+                'options'=> ['class'=>'alert-success']
             ]);
             $tabHash = Yii::$app->request->post('tabHash', '');
             return $this->refresh($tabHash);
         }
 
-        $settingParent = Setting::find()->where(['parent_id' => 0])->orderBy(['sort_order' => SORT_ASC])->all();
+        $settingParent = Setting::find()
+            ->where(['parent_id' => 0])
+            ->orderBy(['sort_order' => SORT_ASC])
+            ->all();
         return $this->render('index', [
             'settingParent' => $settingParent,
         ]);

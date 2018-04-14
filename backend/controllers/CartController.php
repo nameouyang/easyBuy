@@ -132,7 +132,6 @@ class CartController extends Controller
     /**
      * Deletes an existing Cart model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
      * @return mixed
      */
     public function actionClean()

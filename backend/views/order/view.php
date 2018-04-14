@@ -2,16 +2,27 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\DetailView;
 use common\models\Order;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Order */
 
-$this->title = $model->id;
+$this->title = Yii::t('app', 'View') . Yii::t('app', 'Orders') . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<div class="modal-header m-b-md">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ])
+    ?>
+    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+    <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
+</div>
+
 <div class="order-view">
 
     <p>

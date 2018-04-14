@@ -29,7 +29,7 @@ return [
     'Delete' => '删除',
     'Are you sure you want to delete this item?' => '您确定要删除此项吗？',
 
-    'Cms Catalogs' => '分类',
+    'Cms Catalogs' => 'CMS分类',
     'Cms Catalog' => '分类',
     'Cms Shows' => '列表页',
     'Cms Show' => '列表页',

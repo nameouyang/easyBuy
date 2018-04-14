@@ -24,7 +24,7 @@ class OrderController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    //'delete' => ['post'],
                 ],
             ],
             'access' => [
@@ -133,7 +133,7 @@ class OrderController extends Controller
     public function actionDelete($id)
     {
         //if(!Yii::$app->user->can('deleteYourAuth')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
-
+var_dump($id);die;
         //$this->findModel($id)->delete();
         $model = $this->findModel($id);
         $model->status = Order::STATUS_CANCEL;

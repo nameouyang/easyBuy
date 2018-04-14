@@ -18,6 +18,13 @@ class ProductType
     const IS_PROMOTE = 8;
     const IS_GROUP = 16;
 
+    const  TYPE = [
+            self::IS_NEW => '新品',
+            self::IS_HOT => '热销',
+            self::IS_GIFT => '赠品',
+            self::IS_PROMOTE => '促销',
+            self::IS_GROUP => '团购',
+    ];
     public $id;
     public $label;
 

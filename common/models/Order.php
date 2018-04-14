@@ -65,6 +65,34 @@ class Order extends \yii\db\ActiveRecord
 //-1-已取消  -2-删除  1-在线支付  2-货到付款  10-货到付款  20-未付款  30-正在付款  40-已付款  60-未发货  70-准备发货  80-已发货  90-已收货
     public $address_id;
 
+    const PAYMENT_STATUS = [
+        ''=>'按支付状态搜索',
+        self::PAYMENT_STATUS_COD => '货到付款',
+        self::PAYMENT_STATUS_UNPAID => '未付款',
+        self::PAYMENT_STATUS_PAYING => '正在付款',
+        self::PAYMENT_STATUS_PAID => '已付款',
+    ];
+    const SHIPMENT_STATUS = [
+        ''=>'按配送状态搜索',
+        self::SHIPMENT_STATUS_UNSHIPPED => '未发货',
+        self::SHIPMENT_STATUS_PREPARING => '准备发货',
+        self::SHIPMENT_STATUS_SHIPPED => '已发货',
+        self::SHIPMENT_STATUS_RECEIVED => '已收货',
+    ];
+
+    const STATUS = [
+        ''                              => '按订单状态搜索',
+        self::STATUS_CANCEL             => '已取消',
+        self::STATUS_DELETED            => '删除',
+        self::PAYMENT_STATUS_COD        => '货到付款',
+        self::PAYMENT_STATUS_UNPAID     => '未付款',
+        self::PAYMENT_STATUS_PAYING     => '正在付款',
+        self::PAYMENT_STATUS_PAID       => '已付款',
+        self::SHIPMENT_STATUS_UNSHIPPED => '未发货',
+        self::SHIPMENT_STATUS_PREPARING => '准备发货',
+        self::SHIPMENT_STATUS_SHIPPED   => '已发货',
+        self::SHIPMENT_STATUS_RECEIVED  => '已收货',
+    ];
     /**
      * @inheritdoc
      */
@@ -145,6 +173,7 @@ class Order extends \yii\db\ActiveRecord
     }
 
     /**
+     * 关联user表
      * @return \yii\db\ActiveQuery
      */
     public function getUser()
@@ -169,6 +198,7 @@ class Order extends \yii\db\ActiveRecord
     }
 
     /**
+     * 关联区域表
      * @return \yii\db\ActiveQuery
      */
     public function getCountry0()
@@ -221,6 +251,7 @@ class Order extends \yii\db\ActiveRecord
         return $data;
     }
 
+    //订单状态
     public static function getStatusLabels($id = null)
     {
         $data = [
@@ -242,6 +273,7 @@ class Order extends \yii\db\ActiveRecord
         return $data;
     }
 
+    //支付状态
     public static function getPaymentStatusLabels($id = null)
     {
         $data = [
@@ -257,6 +289,7 @@ class Order extends \yii\db\ActiveRecord
         return $data;
     }
 
+    //配送状态
     public static function getShipmentStatusLabels($id = null)
     {
         $data = [
@@ -272,6 +305,7 @@ class Order extends \yii\db\ActiveRecord
         return $data;
     }
 
+    //返回不同订单状态的总数
     public static function getOrderStatusCount($status)
     {
         $count =  self::find()->where(['user_id' => Yii::$app->user->id, 'status' => $status])->count();

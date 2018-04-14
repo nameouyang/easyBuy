@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\CategorySearch */
@@ -11,14 +13,41 @@ use yii\helpers\ArrayHelper;
 $this->title = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-index">
+<div class="category-index padding">
+
+    <?=     Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ])
+    ?>
+
+    <div class="box-header">
+        <h2><?= Html::encode($this->title) ?></h2>
+        <small><?= Html::encode($this->title) ?></small>
+    </div>
+    <div class="row p-a">
+
+        <div style="float:left;" class="m-l-md">
+            <?= Html::a(Yii::t('app', 'Create ') . Yii::t('app', 'Category'), ['create'], [
+                'class' => 'btn btn-success',
+                //'data-toggle' => 'modal',
+                //'data-target' => '#m-a-a-a',
+                //'ui-toggle-class' => 'roll',
+                //'ui-target' => '#animate',
+                'data-url' => Url::to(['create'])
+            ]) ?>
+
+        </div>
+
+        <div class="text-right" style="padding-right:5px">
+            <div id="DataTables_Table_2_filter" class="dataTables_filter">
+                <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+            </div>
+        </div>
+    </div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create ') . Yii::t('app', 'Category'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
             <th>ID</th>
