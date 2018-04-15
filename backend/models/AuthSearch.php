@@ -11,7 +11,7 @@ class AuthSearch extends Model
     public $name;
     public $description;
 
-    public $recordsPerPage = 20;
+    public $recordsPerPage = 10;
 
     /**
      * @inheritdoc

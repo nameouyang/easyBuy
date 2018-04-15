@@ -7,12 +7,12 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Brand */
 
-$this->title = $model->name;
+$this->title                   = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Brands'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="modal-header m-b-md">
+<div class="modal-header">
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ])
@@ -21,21 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
 </div>
 
-<div class="brand-view">
+<div class="brand-view padding">
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
-            'data' => [
+            'data'  => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
+                'method'  => 'post',
             ],
         ]) ?>
     </p>
 
     <?= DetailView::widget([
-        'model' => $model,
+        'model'      => $model,
         'attributes' => [
             'id',
             'name',
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sort_order',
             [
                 'attribute' => 'status',
-                'value' => \common\models\Status::labels($model->status),
+                'value'     => \common\models\Status::labels($model->status),
             ],
             'created_at:datetime',
             'updated_at:datetime',

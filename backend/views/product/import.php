@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="form-group">
         <?= Html::label(Yii::t('app', 'Import File CSV'), 'importFile', ['class' => 'col-lg-1 control-label']) ?>
-        <?= Html::fileInput('importFile') ?>
+        <?= Html::fileInput('importFile', '', []) ?>
     </div>
 
     <div class="form-group">

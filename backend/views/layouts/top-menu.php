@@ -125,11 +125,11 @@ $menuItemsMain = [
         'items' => [
             [
                 'label' => '<i class="fa fa-lock"></i> ' . Yii::t('app', 'Payment'),
-                'url'   => ['/payment'],
+                //'url'   => ['/payment'],
             ],
             [
                 'label' => '<i class="fa fa-lock"></i> ' . Yii::t('app', 'Shipment'),
-                'url'   => ['/shipment'],
+                //'url'   => ['/shipment'],
             ],
             [
                 'label' => '<i class="fa fa-lock"></i> ' . Yii::t('app', 'Auth Role'),

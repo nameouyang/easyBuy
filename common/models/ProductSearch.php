@@ -47,7 +47,9 @@ class ProductSearch extends Product
         $query->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
+            //'sort'       => ['defaultOrder' => ['id'=>SORT_DESC]],
+            'pagination' => ['pageSize'=>10],
         ]);
 
         if ($this->load($params) && !$this->validate()) {

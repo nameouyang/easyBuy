@@ -45,18 +45,19 @@ $this->title = '欢迎进入 easy buy 后台管理';
     <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
 </div>
 
-<div class="site-index" style="margin:0 50px 0 50px">
+<div class="site-index " style="margin:0 50px 0 50px">
     <h4><?= Yii::t('app', 'Order Stat') ?></h4>
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-            <th>&nbsp;</th>
+            <th>时间</th>
             <th><?= Yii::t('app', 'Today') ?></th>
             <th><?= Yii::t('app', 'Yesterday') ?></th>
             <th><?= Yii::t('app', 'Last Week') ?></th>
             <th><?= Yii::t('app', 'This Week') ?></th>
             <th><?= Yii::t('app', 'Last Month') ?></th>
             <th><?= Yii::t('app', 'This Month') ?></th>
+            <th>其他</th>
         </tr>
         </thead>
         <tbody>
@@ -68,6 +69,7 @@ $this->title = '欢迎进入 easy buy 后台管理';
                 <td><span class="label rounded color4" id = "thisWeekCountDD"><?= $dataOrder['thisWeekCount'] ?></span></td>
                 <td><span class="label rounded color5" id = "lastMonthCountDD"><?= $dataOrder['lastMonthCount'] ?></span></td>
                 <td><span class="label rounded color6" id = "thisMonthCountDD"><?= $dataOrder['thisMonthCount'] ?></span></td>
+                <td><span class="label rounded color1" id = "otherCountDD"><?= $dataOrder['otherCount'] ?></span></td>
             </tr>
             <tr data-key="1">
                 <td><?= Yii::t('app', 'Amount') ?></td>
@@ -77,6 +79,7 @@ $this->title = '欢迎进入 easy buy 后台管理';
                 <td><span class="label rounded color4" id = "thisWeekAmount"><?= $dataOrder['thisWeekAmount'] ?></span></td>
                 <td><span class="label rounded color5" id = "lastMonthAmount"><?= $dataOrder['lastMonthAmount'] ?></span></td>
                 <td><span class="label rounded color6" id = "thisMonthAmount"><?= $dataOrder['thisMonthAmount'] ?></span></td>
+                <td><span class="label rounded color1" id = "otherAmount"><?= $dataOrder['otherAmount'] ?></span></td>
             </tr>
         </tbody>
     </table>
@@ -99,7 +102,7 @@ $this->title = '欢迎进入 easy buy 后台管理';
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
-            <th>&nbsp;</th>
+            <th>时间</th>
             <th><?= Yii::t('app', 'Today') ?></th>
             <th><?= Yii::t('app', 'Yesterday') ?></th>
             <th><?= Yii::t('app', 'Last Week') ?></th>

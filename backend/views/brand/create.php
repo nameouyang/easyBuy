@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Brands'), 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="modal-header m-b-md">
+<div class="modal-header">
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ])
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
 </div>
 
-<div class="brand-create">
+<div class="brand-create padding">
 
     <?= $this->render('_form', [
         'model' => $model,

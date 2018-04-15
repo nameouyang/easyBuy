@@ -98,6 +98,10 @@ class SiteController extends Controller
         $dataOrder['thisMonthCount']  = $result['count'];
         $dataOrder['thisMonthAmount'] = floatval($result['amount']);
 
+        $result                       = $query->select('count(*) as count, sum(amount) as amount')->from('order')->where('created_at <= ' . $thisMonthEnd)->createCommand()->queryOne();
+        $dataOrder['otherCount']  = $result['count'];
+        $dataOrder['otherAmount'] = floatval($result['amount']);
+
         // User Stat
         $result                 = $query->select('count(*) as count')->from('user')->where(['and', 'created_at > ' . $todayStart . '', 'created_at <= ' . $todayEnd])->createCommand()->queryOne();
         $dataUser['todayCount'] = $result['count'];

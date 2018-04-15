@@ -1,22 +1,21 @@
 <?php
-
 namespace backend\controllers;
 
 use backend\widgets\image\RemoveAction;
 use backend\widgets\image\UploadAction;
 use common\models\Brand;
 use common\models\Category;
+use common\models\Product;
 use common\models\ProductImage;
+use common\models\ProductSearch;
 use common\models\ProductType;
 use common\models\Status;
 use Yii;
-use common\models\Product;
-use common\models\ProductSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 /**
@@ -28,7 +27,7 @@ class ProductController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -49,11 +48,11 @@ class ProductController extends Controller
     {
         return [
             'upload' => [
-                'class' => UploadAction::className(),
+                'class'  => UploadAction::className(),
                 'upload' => 'upload',
             ],
             'remove' => [
-                'class' => RemoveAction::className(),
+                'class'     => RemoveAction::className(),
                 'uploadDir' => '@frontend/web/upload',
             ],
         ];
@@ -68,11 +67,11 @@ class ProductController extends Controller
     {
         //if(!Yii::$app->user->can('viewYourAuth')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
 
-        $searchModel = new ProductSearch();
+        $searchModel  = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -85,7 +84,7 @@ class ProductController extends Controller
     public function actionView($id)
     {
         //if(!Yii::$app->user->can('viewYourAuth')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
-        
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -108,7 +107,7 @@ class ProductController extends Controller
             if ($model->save()) {
                 return $this->redirect(['update', 'id' => $model->id]);
             }
-       }
+        }
 
         return $this->render('create', [
             'model' => $model,
@@ -151,7 +150,6 @@ class ProductController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-
     }
 
     /**
@@ -165,7 +163,7 @@ class ProductController extends Controller
         //if(!Yii::$app->user->can('deleteYourAuth')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
 
         /*$this->findModel($id)->delete();*/
-        $model = $this->findModel($id);
+        $model         = $this->findModel($id);
         $model->status = Status::STATUS_DELETED;
         $model->save();
 
@@ -186,7 +184,7 @@ class ProductController extends Controller
         if (is_array($ids)) {
             foreach ($ids as $id) {
                 /*$this->findModel($id)->delete();*/
-                $model = $this->findModel($id);
+                $model         = $this->findModel($id);
                 $model->status = Status::STATUS_DELETED;
                 $model->save();
             }
@@ -206,9 +204,8 @@ class ProductController extends Controller
     {
         if (($model = Product::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
@@ -225,7 +222,7 @@ class ProductController extends Controller
         if (Yii::$app->request->post()) {
             $countCreate = $countUpdate = 0;
 
-            $file = UploadedFile::getInstanceByName('importFile');
+            $file   = UploadedFile::getInstanceByName('importFile');
             $handle = fopen($file->tempName, 'r');
             $result = $this->inputCsv($handle);
 
@@ -247,9 +244,9 @@ class ProductController extends Controller
                 }
 
                 // 处理数据，如果ID大于0，则更新，否则新增
-                $line = 2;
+                $line       = 2;
                 $errorLines = [];
-                foreach($arrData as $item) {
+                foreach ($arrData as $item) {
                     if ($item['id'] > 0) { // 已存在的值，则更新数据，以及判断缩略图和图片
                         $model = Product::findOne($item['id']);
                         if ($model === null) {
@@ -258,8 +255,9 @@ class ProductController extends Controller
                             continue;
                         }
                         foreach ($item as $k => $v) {
-                            if ($k == 'id' || $k == 'thumbs' || $k == 'images')
+                            if ($k == 'id' || $k == 'thumbs' || $k == 'images') {
                                 continue;
+                            }
 
                             $model[$k] = iconv('gb2312', 'utf-8', trim($v));
                         }
@@ -275,19 +273,19 @@ class ProductController extends Controller
                         if ($item['thumbs'] && $item['images']) {
                             $arrThumb = explode('|', $item['thumbs']);
                             $arrImage = explode('|', $item['images']);
-                            $i = 0;
-                            $ids = [];
+                            $i        = 0;
+                            $ids      = [];
                             foreach ($arrThumb as $thumb) {
-                                $thumb = trim($thumb);
-                                $image = trim($arrImage[$i]);
+                                $thumb        = trim($thumb);
+                                $image        = trim($arrImage[$i]);
                                 $productImage = ProductImage::find()->where(['product_id' => $item['id'], 'thumb' => $thumb, 'image' => $image])->one();
                                 if ($productImage) { //如果图片在数据库中已经存在，则假如到ids数组，防止后续被删除
                                     array_push($ids, $productImage->id);
                                 } else { //不存在的话，新增记录并将id加入到ids
                                     $productImage = new ProductImage([
                                         'product_id' => $item['id'],
-                                        'thumb' => $thumb,
-                                        'image' => $image,
+                                        'thumb'      => $thumb,
+                                        'image'      => $image,
                                     ]);
                                     $productImage->save();
 
@@ -303,17 +301,18 @@ class ProductController extends Controller
                     } else { // 新的数据，插入，并将缩略图和图片插入
                         $model = new Product();
                         foreach ($item as $k => $v) {
-                            if ($k == 'id' || $k == 'thumbs' || $k == 'images')
+                            if ($k == 'id' || $k == 'thumbs' || $k == 'images') {
                                 continue;
+                            }
 
                             $model[$k] = iconv('gb2312', 'utf-8', trim($v));
                         }
 
                         // 将分类和品牌转换成对应的ID
-                        $category = Category::find()->where(['name' => trim($model->category_id)])->one();
+                        $category           = Category::find()->where(['name' => trim($model->category_id)])->one();
                         $model->category_id = $category ? $category->id : 1;
-                        $brand = Brand::find()->where(['name' => trim($model->brand_id)])->one();
-                        $model->brand_id = $brand ? $brand->id : 0;
+                        $brand              = Brand::find()->where(['name' => trim($model->brand_id)])->one();
+                        $model->brand_id    = $brand ? $brand->id : 0;
 
                         $result = $model->save();
                         if (!$result) { //如果保存失败
@@ -326,15 +325,15 @@ class ProductController extends Controller
                         if ($item['thumbs'] && $item['images']) {
                             $arrThumb = explode('|', $item['thumbs']);
                             $arrImage = explode('|', $item['images']);
-                            $i = 0;
+                            $i        = 0;
                             foreach ($arrThumb as $thumb) {
                                 $thumb = trim($thumb);
                                 $image = trim($arrImage[$i]);
                                 if ($thumb && $image) { // 缩略图和图片都有才加入
                                     $productImage = new ProductImage([
                                         'product_id' => $model->id,
-                                        'thumb' => $thumb,
-                                        'image' => $image,
+                                        'thumb'      => $thumb,
+                                        'image'      => $image,
                                     ]);
                                     $productImage->save();
                                 }
@@ -347,9 +346,9 @@ class ProductController extends Controller
                 }
                 if (count($errorLines)) {
                     $strLine = implode(', ', $errorLines);
-                    Yii::$app->getSession()->setFlash('danger', Yii::t('app', "Line {strLine} error.", ['strLine' => $strLine] ));
+                    Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'Line {strLine} error.', ['strLine' => $strLine]));
                 }
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', "Import Data Success. Create: {countCreate}  Update: {countUpdate}", ['countCreate' => $countCreate, 'countUpdate' => $countUpdate] ));
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Import Data Success. Create: {countCreate}  Update: {countUpdate}', ['countCreate' => $countCreate, 'countUpdate' => $countUpdate]));
             }
         }
 
@@ -359,13 +358,11 @@ class ProductController extends Controller
 
     public function inputCsv($handle)
     {
-        $out = array ();
-        $n = 0;
-        while ($data = fgetcsv($handle, 10000))
-        {
+        $out = array();
+        $n   = 0;
+        while ($data = fgetcsv($handle, 10000)) {
             $num = count($data);
-            for ($i = 0; $i < $num; $i++)
-            {
+            for ($i = 0; $i < $num; $i++) {
                 $out[$n][$i] = $data[$i];
             }
             $n++;
@@ -388,7 +385,7 @@ class ProductController extends Controller
 
         // 生成csv标题行
         $product = new Product();
-        $start = true;
+        $start   = true;
         foreach ($format as $column) {
             if ($start) {
                 $str .= '"' . iconv('utf-8', 'gb2312', $product->attributeLabels()[$column]) . '"';
@@ -408,7 +405,7 @@ class ProductController extends Controller
                 if ($column == 'category_id') {
                     if ($row[$column] > 0) {
                         $category = Category::findOne($row[$column]);
-                        $value = iconv('utf-8', 'gb2312', $category->name);
+                        $value    = iconv('utf-8', 'gb2312', $category->name);
                     }
                 } elseif ($column == 'brand_id') {
                     if ($row[$column] > 0) {
@@ -422,13 +419,13 @@ class ProductController extends Controller
                     $str .= '"' . $value . '"';
                     $start = false;
                 } else {
-                    $str .= ',"' . str_replace("\"", "\"\"", $value) . '"';
+                    $str .= ',"' . str_replace('"', '""', $value) . '"';
                 }
             }
 
             // 导出product_image表中的数据
-            $start = true;
-            $strThumb = $strImage = '';
+            $start         = true;
+            $strThumb      = $strImage      = '';
             $productImages = ProductImage::find()->where(['product_id' => $row->id])->all();
             foreach ($productImages as $item) {
                 if ($start) {
@@ -445,16 +442,13 @@ class ProductController extends Controller
             $str .= "\n";
         }
 
-        $filename = date('Ymd').'.csv';
+        $filename = date('Ymd') . '.csv';
 
-        header("Content-type:text/csv");
-        header("Content-Disposition:attachment;filename=".$filename);
+        header('Content-type:text/csv');
+        header('Content-Disposition:attachment;filename=' . $filename);
         header('Cache-Control:must-revalidate,post-check=0,pre-check=0');
         header('Expires:0');
         header('Pragma:public');
         echo $str;
     }
-
-
-
 }

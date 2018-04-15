@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3 class="modal-title"><?= Html::encode($this->title) ?></h3>
 </div>
 
-<div class="user-form">
+<div class="user-form padding">
 
     <?php $form = ActiveForm::begin(); ?>
 

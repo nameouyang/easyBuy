@@ -44,9 +44,10 @@ class UserSearch extends User
         $query = User::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
+            //'sort'       => ['defaultOrder' => ['id'=>SORT_DESC]],
+            'pagination' => ['pageSize'=>10],
         ]);
-
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
