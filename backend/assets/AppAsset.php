@@ -36,11 +36,10 @@ class AppAsset extends AssetBundle
         'css/font.css',
     ];
     public $js = [
-        'libs/jquery/jquery/dist/jquery.js',
+        //'libs/jquery/jquery/dist/jquery.js',
+
         'libs/jquery/tether/dist/js/tether.min.js',
         //'libs/jquery/bootstrap/dist/js/bootstrap.js',
-        //'libs/jquery/bootstrap/dist/js/bootstrap.js',
-        // core -->
         'libs/js/toastr/toastr.min.js',  // toastr
         'libs/jquery/screenfull/dist/screenfull.min.js',
         'libs/jquery/underscore/underscore-min.js',

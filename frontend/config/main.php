@@ -58,6 +58,14 @@ return [
                 ],
             ],
         ],
+
+        'request' => [
+            'baseUrl' => '',
+        ],
+
     ],
+
+    'homeUrl' => '/',
+
     'params' => $params,
 ];

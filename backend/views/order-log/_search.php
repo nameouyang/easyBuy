@@ -33,11 +33,16 @@ use yii\widgets\ActiveForm;
         ]
     )->label(false) ?>
 
-    <?= $form->field($model, 'status')->textInput(
+    <?= $form->field($model, 'status')->dropDownList(
+        \common\models\Order::getStatusLabels(),
         [
-            'class'       => 'form-control search-input-item',
-            'placeholder' => Yii::t('app', 'Search for status'),
-            'type' => 'search'
+            'class'       => 'form-control search-input-item select2',
+            'prompt' => Yii::t('app', 'Search for status'),
+            'type' => 'search',
+
+//            'style'      => 'width:150px',
+            'ui-jp'      => 'select2',
+            'ui-options' => "{theme: 'bootstrap'}",
         ]
     )->label(false) ?>
 

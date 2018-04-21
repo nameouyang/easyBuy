@@ -1,5 +1,9 @@
 var code = 0;
 
+$('#signupform-email').bind('input propertychange', function() {
+    $("#code").val("");
+    code = 0;
+});
 $('#send_email').click(function (e) {
     e.preventDefault();
     var email = $('#signupform-email').val();

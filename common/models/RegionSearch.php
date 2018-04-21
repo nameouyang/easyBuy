@@ -43,11 +43,11 @@ class RegionSearch extends Region
     {
         $query = Region::find();
         
-        $query->orderBy(['id' => SORT_ASC]);
+        //$query->orderBy(['id' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
-            //'sort'       => ['defaultOrder' => ['id'=>SORT_DESC]],
+            'sort'       => ['defaultOrder' => ['created_at' => SORT_DESC, 'id'=>SORT_DESC]],
             'pagination' => ['pageSize'=>10],
         ]);
 

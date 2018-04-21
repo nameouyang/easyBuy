@@ -85,12 +85,12 @@ $this->title = '欢迎进入 easy buy 后台管理';
     </table>
 </div>
 
-<div height="400" width="600" style="margin:50px; float: left">
+<div height="400" width="500" style="margin:50px; float: left">
     <canvas id="barChart"> 你的浏览器不支持HTML5 canvas </canvas>
     <h5 style="text-align: center">订单数统计</h5>
 </div>
 
-<div height="400" width="600" style="margin:50px; float: right">
+<div height="400" width="500" style="margin:50px; float: right">
     <canvas id="barChartAll"> 你的浏览器不支持HTML5 canvas </canvas>
     <h5 style="text-align: center;">销售额统计</h5>
 </div>

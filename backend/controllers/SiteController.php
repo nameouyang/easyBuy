@@ -16,6 +16,11 @@ require_once "../../common/vendors/alipay/pagepay/service/AlipayTradeService.php
  */
 class SiteController extends Controller
 {
+    public function init()
+    {
+        $this->enableCsrfValidation = false;
+    }
+
     /**
      * @inheritdoc
      */

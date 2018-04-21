@@ -43,11 +43,11 @@ class SearchLogSearch extends SearchLog
     {
         $query = SearchLog::find();
         
-        $query->orderBy(['created_at' => SORT_DESC]);
+        //$query->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
-            //'sort'       => ['defaultOrder' => ['id'=>SORT_DESC]],
+            'sort'       => ['defaultOrder' => ['created_at' => SORT_DESC, 'id'=>SORT_DESC]],
             'pagination' => ['pageSize'=>10],
         ]);
 

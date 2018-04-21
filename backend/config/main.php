@@ -52,6 +52,16 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
+        //设置一个域名访问是需要加上
+        'request' => [
+            'enableCsrfValidation' => false,
+            'baseUrl' => '/admin',
+        ],
+
     ],
     'params' => $params,
+
+    //设置一个域名访问是需要加上
+    'homeUrl' => '/admin',
 ];

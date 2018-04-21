@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'tableOptions' => [
                         'class' => 'table table-bordered table-striped table-hover m-a-0 water-mark',
-                        'style' => 'min-width:53rem',
+                        'style' => 'min-width:122rem',
                     ],
                     'pager' => [
                         'options'          => ['class' => 'pagination pagination-sm m-a-0'],
@@ -77,7 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'layout'  => '<div class="box-divider m-a-0"></div><div>{items}</div><div class="dker p-a"><div class="row"><div class="col-md-5"><small class="text-muted inline m-t-sm m-b-sm">{summary}</small></div><div class="col-md-7 text-right text-center-xs">{pager}</div></div>',
                     'columns' => [
-                        ['class' => 'yii\grid\CheckboxColumn'],
+                        [
+                            'headerOptions' => ['class' => 'col-th-5'],
+                            'class' => 'yii\grid\CheckboxColumn'
+                        ],
 
                         [
                             'attribute'     => 'id',
@@ -135,6 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'attribute' => 'brand_id',
+                            'headerOptions' => ['class' => 'col-th-7'],
                             'value'     => function ($model) {
                                 return $model->brand ? $model->brand->name : '-';
                             },
