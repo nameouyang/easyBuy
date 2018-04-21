@@ -47,7 +47,7 @@ class AddressSearch extends Address
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
-            'sort'       => ['defaultOrder' => ['created_at' => SORT_DESC,'id'=>SORT_DESC]],
+            'sort'       => ['defaultOrder' => ['id'=>SORT_DESC]],
             'pagination' => ['pageSize'=>10],
         ]);
 
